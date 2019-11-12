@@ -35,4 +35,12 @@ class LoginPageTest extends BasePageTest {
         loginPage.login(loginPage.getIncorrectUsername(), loginPage.getIncorrectPassword());
         Assertions.assertTrue(loginPage.checkIfErrorMessageAppears());
     }
+
+    @Test
+    void ShouldReturnErrorWithEmptyLoginFields() {
+        loginPage.login("", "");
+        Assertions.assertTrue(loginPage.checkIfErrorMessageAppears());
+    }
+
+
 }

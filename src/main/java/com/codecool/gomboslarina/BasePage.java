@@ -48,4 +48,24 @@ public class BasePage {
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getIncorrectPassword() {
+        return incorrectPassword;
+    }
+
+    public String getIncorrectUsername() {
+        return incorrectUsername;
+    }
 }

@@ -6,11 +6,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class ProfilePage extends BasePage{
 
-    @FindBy(xpath = "//dd[@id = 'up-d-username']")
+    @FindBy(xpath = "//dd[@id='up-d-username']")
     private WebElement profilePageUsername;
 
 
-    @FindBy(xpath = "//dd[@id = 'up-d-email']")
+    @FindBy(xpath = "//dd[@id='up-d-email']")
     private WebElement profilePageEmail;
 
     public ProfilePage(WebDriver driver) {

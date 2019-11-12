@@ -6,20 +6,21 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "input//[@id = 'login-form-username']")
+    @FindBy(xpath = "//input[@id='login-form-username']")
     private WebElement loginUsername;
 
-    @FindBy(xpath = "//input[@id = 'login-form-password']")
+    @FindBy(xpath = "//input[@id='login-form-password']")
     private WebElement loginPassWord;
 
-    @FindBy(xpath = "//input[@id = 'login']")
+    @FindBy(xpath = "//input[@id='login']")
     private WebElement loginSubmitButton;
 
-    @FindBy(xpath = "//div[id='usernameerror']")
+    @FindBy(xpath = "//div[@id='usernameerror']")
     private WebElement errorMessage;
 
-    @FindBy(xpath = "//[@id = 'login-form-remember-me']")
+    @FindBy(xpath = "//[@id='login-form-remember-me']")
     private WebElement rememberMeCheckbox;
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -54,6 +55,5 @@ public class LoginPage extends BasePage {
         rememberMeCheckbox.click();
         return rememberMeCheckbox.isSelected();
     }
-
 
 }

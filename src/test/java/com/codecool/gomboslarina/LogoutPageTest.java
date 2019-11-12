@@ -1,9 +1,6 @@
 package com.codecool.gomboslarina;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +14,11 @@ class LogoutPageTest extends BasePageTest {
         login();
         logout();
         logoutPage = new LogoutPage(getDriver());
+    }
+
+    @AfterEach
+    public void closeTests() {
+        super.shutDown();
     }
 
     @Test

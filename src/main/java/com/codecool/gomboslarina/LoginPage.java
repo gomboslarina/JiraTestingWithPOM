@@ -18,7 +18,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//div[@id='usernameerror']")
     private WebElement errorMessage;
 
-    @FindBy(xpath = "//[@id='login-form-remember-me']")
+    @FindBy(xpath = "//input[@id='login-form-remember-me']")
     private WebElement rememberMeCheckbox;
 
 

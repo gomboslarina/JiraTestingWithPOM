@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasePageTest {
-    private static String driverPath = "/Users/larinagombos/Desktop/CodeCool/Test/chromedriver/chromedriver 2";
+    private static String driverPath = System.getenv("DRIVERPATH");
     private WebDriver driver;
 
     public void setUp() {
@@ -30,8 +30,6 @@ class BasePageTest {
             driver.quit();
         }
     }
-
-
 
     public WebDriver getDriver() {
         return driver;

@@ -6,6 +6,8 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 public class BasePage {
 
     static String driverPath = System.getenv("DRIVERPATH");
@@ -17,11 +19,11 @@ public class BasePage {
     String incorrectPassword = System.getenv("INCORRECT_PASSWORD");
     String incorrectUsername = System.getenv("INCORRECT_USERNAME");
 
-    private static final int TIMEOUT = 5;
+    private static final int TIMEOUT = 10;
     private static final int POLLING = 100;
 
     protected WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -37,8 +39,17 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    protected WebElement waitForElementToBeVisible(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
+
     protected void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected boolean isElementVisible(WebElement element) {
+        return element.isDisplayed();
     }
 
     protected void waitForElementToDisappear(WebElement element) {

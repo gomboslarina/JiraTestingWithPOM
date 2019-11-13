@@ -3,6 +3,8 @@ package com.codecool.gomboslarina;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BasePageTest {
@@ -12,6 +14,7 @@ class BasePageTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
 
     public void login() {
@@ -33,5 +36,9 @@ class BasePageTest {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public void implicitlyWait() {
+        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     }
 }

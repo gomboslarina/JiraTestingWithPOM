@@ -20,19 +20,23 @@ public class BrowseIssueTest extends BasePageTest {
         projectPage = new ProjectPage(getDriver());
         issuePage = new IssuePage(getDriver());
         loginPage.successfulLogin();
+    }
+
+    @BeforeEach
+    void goToSearchIssuePage() {
         dashboardPage.goToSearchIssuesPage();
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)
-    void isBrowsingIssueAvailable(String project) {
+    void isIssueListAvailableOnProjectPage(String project) {
         Assertions.assertTrue(projectPage.checkIssueListIsAvailable(project));
     }
 
 
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseIssue.csv", numLinesToSkip = 1)
-    void isSearchingIssuesAvailable(String issueName) {
+    void areSpecificIssuesAvailable(String issueName) {
         Assertions.assertTrue(issuePage.searchForIssues(issueName));
     }
 

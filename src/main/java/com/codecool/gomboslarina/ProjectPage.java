@@ -40,6 +40,9 @@ public class ProjectPage extends BasePage {
     @FindBy(xpath = "//span[@class='aui-icon aui-icon-large glass-project-icon']")
     private WebElement glassLink;
 
+    @FindBy(xpath = "//*[@id='projects']")
+    WebElement allProjectsList;
+
     private String mainTestingProjectUrl = "https://jira.codecool.codecanvas.hu/projects/MTP/issues/MTP-154?filter=allopenissues";
 
     private String coalaProjectUrl = "https://jira.codecool.codecanvas.hu/projects/JETI/issues/JETI-234?filter=allopenissues";
@@ -48,11 +51,11 @@ public class ProjectPage extends BasePage {
 
     private String toucanProjectUrl = "https://jira.codecool.codecanvas.hu/projects/TOUCAN/issues/TOUCAN-52?filter=allopenissues";
 
-    public WebElement getCoalaHeadingIcon() {
+    public WebElement getCoalaHeading() {
         return coalaHeading;
     }
 
-    public WebElement getMainTestingProjectHeadingIcon() {
+    public WebElement getMainTestingProjectHeading() {
         return mainTestingProjectHeading;
     }
 
@@ -64,28 +67,9 @@ public class ProjectPage extends BasePage {
         return jetiHeading;
     }
 
-    public WebElement getReleaseLink() {
-        return releaseLink;
-    }
-
     public boolean IsProjectHeadingDisplayed(String title, WebElement element) {
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         return element.getText().equals(title);
-    }
-    public String getMainTestinProjectUrl() {
-        return mainTestingProjectUrl;
-    }
-
-    public String getCoalaProjectUrl() {
-        return coalaProjectUrl;
-    }
-
-    public String getJetiProjectUrl() {
-        return jetiProjectUrl;
-    }
-
-    public String getToucanProjectUrl() {
-        return toucanProjectUrl;
     }
 
     public boolean checkIssueListIsAvailable(String project) {
@@ -148,5 +132,10 @@ public class ProjectPage extends BasePage {
     void clickOnGlassLink() {
         waitForElementToBeClickable(glassLink);
         glassLink.click();
+    }
+
+    boolean isAllProjectsListDisplayed() {
+        waitForElementToBeVisible(allProjectsList);
+        return allProjectsList.isDisplayed();
     }
 }

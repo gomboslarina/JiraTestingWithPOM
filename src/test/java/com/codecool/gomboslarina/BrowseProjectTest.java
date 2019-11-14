@@ -27,6 +27,11 @@ public class BrowseProjectTest extends BasePageTest {
         dashboardPage.goToAllProjectSearchPage();
     }
 
+    @Test
+    void isAllProjectsListDisplayed() {
+        Assertions.assertTrue(projectPage.isAllProjectsListDisplayed());
+    }
+
     // it's all tests, including TOUCAN/JETI/COALA
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)
@@ -35,7 +40,7 @@ public class BrowseProjectTest extends BasePageTest {
         implicitlyWait();
         switch (title) {
             case "Main Testing Project":
-                Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getMainTestingProjectHeadingIcon()));
+                Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getMainTestingProjectHeading()));
                 break;
             case "TOUCAN projekt":
                 Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getToucanHeadingIcon()));
@@ -44,7 +49,7 @@ public class BrowseProjectTest extends BasePageTest {
                 Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getJetiHeadingIcon()));
                 break;
             case "COALA Project":
-                Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getCoalaHeadingIcon()));
+                Assertions.assertTrue(projectPage.IsProjectHeadingDisplayed(title, projectPage.getCoalaHeading()));
                 break;
             default:
                 System.out.println("No heading found.");

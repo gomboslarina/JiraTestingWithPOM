@@ -26,7 +26,7 @@ public class GlassVersionTest extends BasePageTest {
 
     @Test
     void isGlassVersionUpToDate() {
-        List<String> glassVersion = glassDocumentationPage.getVersionAttributes();
+        List<String> glassVersion = glassDocumentationPage.getGlassVersionAttributes();
         projectPage.clickOnReleaseLink();
         List<String> version = projectPage.getVersionAttributes();
         Assertions.assertArrayEquals(glassVersion.toArray(), version.toArray());

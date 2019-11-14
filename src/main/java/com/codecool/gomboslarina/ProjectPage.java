@@ -129,9 +129,11 @@ public class ProjectPage extends BasePage {
     List<String> getVersionAttributes() {
         List<String> versionAttributes = new ArrayList<>();
         changeCheckedStatusOfReleaseButtons();
+        WebElement versionNumber = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[.='5.0']")));
         WebElement status = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//tbody[@class='items ui-sortable']//span[@class='aui-lozenge aui-lozenge-current aui-lozenge-subtle']")));
         WebElement date = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//time[.='22/Oct/19']")));
         WebElement description = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[.='Check this version in glass']")));
+        versionAttributes.add(versionNumber.getText());
         versionAttributes.add(status.getText());
         versionAttributes.add(date.getText());
         versionAttributes.add(description.getText());

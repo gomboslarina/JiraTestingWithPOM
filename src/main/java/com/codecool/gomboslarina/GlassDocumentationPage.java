@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GlassDocumentationPage extends BasePage{
 
-    public GlassDocumentationPage(WebDriver driver) {
+    GlassDocumentationPage(WebDriver driver) {
         super(driver);
     }
 
@@ -39,6 +39,11 @@ public class GlassDocumentationPage extends BasePage{
         versionLink.click();
     }
 
+    String getVersionNumber() {
+        waitForElementToBeVisible(version5Link);
+        return version5Link.getText();
+    }
+
     String getReleaseStatus() {
         waitForElementToBeVisible(releaseStatus);
         return releaseStatus.getText();
@@ -54,9 +59,10 @@ public class GlassDocumentationPage extends BasePage{
         return versionDescription.getText();
     }
 
-    public List<String> getVersionAttributes() {
+    List<String> getGlassVersionAttributes() {
         List<String> versionAttributes = new ArrayList<>();
         gotToGlassVersionPage();
+        versionAttributes.add(getVersionNumber());
         versionAttributes.add(getReleaseStatus());
         versionAttributes.add(getVersionDate());
         versionAttributes.add(getVersionDescription());

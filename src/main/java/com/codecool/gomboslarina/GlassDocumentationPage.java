@@ -1,11 +1,11 @@
 package com.codecool.gomboslarina;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GlassDocumentationPage extends BasePage{
 
@@ -27,6 +27,12 @@ public class GlassDocumentationPage extends BasePage{
 
     @FindBy(xpath = "//div[.='Check this version in glass']")
     private WebElement versionDescription;
+
+    @FindBy(xpath = "//a[.='Permissions']")
+    private WebElement glassPermissionLink;
+
+    @FindBy(xpath = "//*[@id='glass-permissions-panel']/div/table/tbody")
+    private WebElement permissionTable;
 
     private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
 
@@ -69,5 +75,30 @@ public class GlassDocumentationPage extends BasePage{
         return versionAttributes;
     }
 
+    void goToGlassPermissionPage() {
+        waitForElementToBeClickable(glassPermissionLink);
+        glassPermissionLink.click();
+    }
 
+
+    // This shows the permission ticks from the glass doc page:
+    Map<String, List<Boolean>> getGlassPagePermissions() {
+        List<WebElement> tableRows = permissionTable.findElements(By.cssSelector("tr.permtr"));
+        //System.out.println(tableRows);
+        List<Boolean> permissionTicks = new ArrayList<>();
+        Map<String, List<Boolean>> permissions = new HashMap<>();
+        for (WebElement row : tableRows) {
+            List<WebElement> e = row.findElements(By.cssSelector("td.td-icon"));
+            for (int i = 0; i < e.size(); i++) {
+                try {
+                    e.get(i).findElement(By.cssSelector("glass-true-icon"));
+                    permissionTicks.add(i, true);
+                } catch (Exception exception) {
+                    permissionTicks.add(i, false);
+                }
+            }
+            permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
+        }
+        return permissions;
+    }
 }

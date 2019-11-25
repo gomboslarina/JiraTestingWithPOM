@@ -41,7 +41,13 @@ public class ProjectPage extends BasePage {
     private WebElement glassLink;
 
     @FindBy(xpath = "//*[@id='projects']")
-    WebElement allProjectsList;
+    private WebElement allProjectsList;
+
+    @FindBy(xpath = "//*[@id=\"content\"]/div[1]/div/div[2]")
+    private WebElement projectSettingsLinkIcon;
+
+    @FindBy(xpath = "//a[@id='view_project_permissions']")
+    private WebElement projectPermissionsLink;
 
     private String mainTestingProjectUrl = "https://jira.codecool.codecanvas.hu/projects/MTP/issues/MTP-154?filter=allopenissues";
 
@@ -137,5 +143,16 @@ public class ProjectPage extends BasePage {
     boolean isAllProjectsListDisplayed() {
         waitForElementToBeVisible(allProjectsList);
         return allProjectsList.isDisplayed();
+    }
+
+    void goToPermissions() {
+        try {
+            fluentlyWait(projectSettingsLinkIcon);
+            projectSettingsLinkIcon.click();
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            projectSettingsLinkIcon.click();
+        }
+        waitForElementToBeClickable(projectPermissionsLink);
+        projectPermissionsLink.click();
     }
 }

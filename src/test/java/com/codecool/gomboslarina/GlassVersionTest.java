@@ -20,7 +20,7 @@ public class GlassVersionTest extends BasePageTest {
         dashboardPage = new DashboardPage(getDriver());
         projectPage = new ProjectPage(getDriver());
         loginPage.successfulLogin();
-        dashboardPage.goToPrivateProject();
+        dashboardPage.goToPrivateProjectPage();
         projectPage.clickOnGlassLink();
     }
 

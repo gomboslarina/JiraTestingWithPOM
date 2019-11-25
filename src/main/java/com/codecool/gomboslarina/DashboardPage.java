@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.concurrent.TimeUnit;
 
 public class DashboardPage extends BasePage{
 
@@ -73,7 +72,7 @@ public class DashboardPage extends BasePage{
         searchAllIssues.click();
     }
 
-    public void goToPrivateProject() {
+    public void goToPrivateProjectPage() {
         waitForElementToBeClickable(projectLink);
         projectLink.click();
         waitForElementToBeClickable(privateProject4Link);

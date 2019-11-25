@@ -16,6 +16,8 @@ public class ProjectPermissionsPage extends BasePage {
     @FindBy(xpath = "//*[@id='project-config-panel-permissions']")
     private WebElement permissionTable;
 
+    private String projectPermissionsUrl = "https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP4/permissions";
+
     // with this method we get all the data we need from the permission table as a list of list of strings. Maybe it should be Hashmap.
     List<List<String>> getTableDataOfTableRows() {
         waitForElementToBeVisible(permissionTable);
@@ -42,26 +44,77 @@ public class ProjectPermissionsPage extends BasePage {
 
     //this is the hashmap variate from the project page permissions:
     Map<String, List<Boolean>> createMapFromProjectPagePermissions() {
-        List<List<String>> permissions = getTableDataOfTableRows();
+        List<List<String>> permissions = getTableDataOfTableRows(); // idáig megvan mind a 34 permission
         Map<String, List<Boolean>> permissionsMap = new HashMap<>();
-        List<Boolean> booleans = new ArrayList<>();
         for (List<String> permRow : permissions) {
+            List<Boolean> permissionTicks = new ArrayList<>();
+            permissionTicks.add(false);
             for (int i = 1; i < permRow.size(); i++) {
-                if (permRow.get(i).contains("Application access")) {
-                    permissionsMap.get(permRow.get(0)).set(i, true);
+                if (permRow.get(i).contains("Application access".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Project Role")) {
-                    permissionsMap.get(permRow.get(0)).set(i, true);
+                if (permRow.get(i).contains("Project Role".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Assignee")) {
-                    permissionsMap.get(permRow.get(0)).set(i, true);
+                if (permRow.get(i).contains("Assignee".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Reporter")) {
-                    permissionsMap.get(permRow.get(0)).set(i, true);
+                if (permRow.get(i).contains("Reporter".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
                 }
+                permissionsMap.put(permRow.get(0), permissionTicks);
+                System.out.println(permRow.get(0));
+                System.out.println(Arrays.toString(permissionTicks.toArray()));
             }
         }
         return permissionsMap;
+    }
+
+    boolean areProjectAndGlassPermissionsEqual(ProjectPage projectPage, GlassDocumentationPage glassDocumentationPage) {
+        goToPermissions();
+        Map<String, List<Boolean>> projectPermissions = createMapFromProjectPagePermissions(); // idáig eljut
+        projectPage.clickOnGlassLink();
+        glassDocumentationPage.goToGlassPermissionPage();
+        Map<String, List<Boolean>> glassPermissions = glassDocumentationPage.getGlassPagePermissions();
+        int sizeOfGlassPerm = glassPermissions.keySet().size();
+        for (String projectKey : projectPermissions.keySet()) {
+            for (String glassKey : glassPermissions.keySet()) {
+                if (projectKey.equals(glassKey)) {
+                    if (compareBooleanLists(projectPermissions.get(projectKey), glassPermissions.get(glassKey))) {
+                        sizeOfGlassPerm--;
+                    } else {
+                        System.out.println("Project permission and glass permission does not equal.");
+                    }
+                }
+            }
+        }
+        return sizeOfGlassPerm == glassPermissions.keySet().size();
+    }
+
+    boolean compareBooleanLists(List<Boolean> a, List<Boolean> b) {
+        int size = a.size();
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i) == b.get(i)) {
+                size--;
+            }
+        }
+        return size == b.size();
+    }
+
+    private void goToPermissions() {
+        navigateToPage(projectPermissionsUrl);
     }
 
 }

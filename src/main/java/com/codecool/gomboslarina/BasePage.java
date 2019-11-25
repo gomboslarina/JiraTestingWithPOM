@@ -113,38 +113,6 @@ public class BasePage {
     public void fluentlyWait(WebElement element) {
         fluentWait.until(ExpectedConditions.visibilityOf(element));
     }
-
-
-    boolean areProjectAndGlassPermissionsEqual(ProjectPage projectPage, ProjectPermissionsPage projectPermissionsPage, GlassDocumentationPage glassDocumentationPage) {
-        projectPage.goToPermissions();
-        Map<String, List<Boolean>> projectPermissions = projectPermissionsPage.createMapFromProjectPagePermissions();
-        projectPage.clickOnGlassLink();
-        glassDocumentationPage.goToGlassPermissionPage();
-        Map<String, List<Boolean>> glassPermissions = glassDocumentationPage.getGlassPagePermissions();
-        int sizeOfGlassPerm = glassPermissions.keySet().size();
-        for (String projectKey : projectPermissions.keySet()) {
-            for (String glassKey : glassPermissions.keySet()) {
-                if (projectKey.equals(glassKey)) {
-                    if (compareBooleanLists(projectPermissions.get(projectKey), glassPermissions.get(glassKey))) {
-                        sizeOfGlassPerm--;
-                    } else {
-                        System.out.println("Project permission and glass permission does not equal.");
-                    }
-                }
-            }
-        }
-        return sizeOfGlassPerm == glassPermissions.keySet().size();
-    }
-
-    boolean compareBooleanLists(List<Boolean> a, List<Boolean> b) {
-        int size = a.size();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i) == b.get(i)) {
-                size--;
-            }
-        }
-        return size == b.size();
-    }
 }
 
 

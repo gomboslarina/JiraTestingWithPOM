@@ -31,7 +31,7 @@ public class GlassPermissionsTest extends BasePageTest {
 
     @Test
     void areGlassPermissionsParallelWithProjectPermissions() {
-        loginPage.areProjectAndGlassPermissionsEqual(projectPage, projectPermissionsPage, glassDocumentationPage);
+        projectPermissionsPage.areProjectAndGlassPermissionsEqual(projectPage, glassDocumentationPage);
     }
 
     @AfterAll

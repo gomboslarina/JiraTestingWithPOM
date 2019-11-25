@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-
 public class DashboardPage extends BasePage{
 
     @FindBy(xpath = "//a[@id='header-details-user-fullname']")
@@ -15,6 +14,9 @@ public class DashboardPage extends BasePage{
 
     @FindBy(xpath = "//a[@id='log_out']")
     private WebElement logoutLink;
+
+    @FindBy(xpath = "//a[@id = 'create_link']")
+    private WebElement createButton;
 
     @FindBy(xpath = "//a[@id='browse_link']")
     private WebElement projectLink;
@@ -40,7 +42,10 @@ public class DashboardPage extends BasePage{
         avatarPicture.click();
         waitForElementToBeClickable(viewProfile);
         viewProfile.click();
+    }
 
+    public void checkIfUserIsLoggedIn() {
+        waitForElementToAppear(avatarPicture);
     }
 
     public void logOut() {
@@ -48,6 +53,12 @@ public class DashboardPage extends BasePage{
         avatarPicture.click();
         waitForElementToBeClickable(logoutLink);
         logoutLink.click();
+    }
+
+    public void clickOnCreateButton() {
+//        waitForElementToAppear(createButton);
+        javascriptExecutor.executeScript("arguments[0].click()", createButton);
+//        createButton.click();
     }
 
     public WebElement getProjectLink() {
@@ -78,6 +89,8 @@ public class DashboardPage extends BasePage{
         waitForElementToBeClickable(privateProject4Link);
         privateProject4Link.click();
     }
+
+
 
 
 }

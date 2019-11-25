@@ -6,6 +6,12 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.time.Duration;
 import java.util.List;
@@ -13,8 +19,11 @@ import java.util.Map;
 
 public class BasePage {
 
-    String username = System.getenv("USERNAME");
-    String password = System.getenv("PASSWORD");
+    static String driverPath = System.getenv("DRIVERPATH");
+    WebDriver webDriver;
+    String url = "https://jira.codecool.codecanvas.hu/";
+    private String username = System.getenv("USERNAME");
+    private String password = System.getenv("PASSWORD");
     private String email = System.getenv("EMAIL");
     private String incorrectPassword = System.getenv("INCORRECT_PASSWORD");
     private String incorrectUsername = System.getenv("INCORRECT_USERNAME");
@@ -25,15 +34,18 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected FluentWait<WebDriver> fluentWait;
+    protected JavascriptExecutor javascriptExecutor;
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, TIMEOUT, POLLING);
-        fluentWait  = new FluentWait<>(driver)
+        fluentWait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(TIMEOUT))
                 .pollingEvery(Duration.ofSeconds(POLLING))
                 .ignoring(org.openqa.selenium.ElementClickInterceptedException.class);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
+        javascriptExecutor = (JavascriptExecutor) driver;
     }
 
     protected void navigateToPage(String url) {
@@ -61,6 +73,19 @@ public class BasePage {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
+//    protected void waitForElementNotToExist() {
+//        wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated()))
+//    }
+
+
+    public void handleAlert() {
+        try {
+            Alert alt = driver.switchTo().alert();
+            alt.accept();
+        } catch (NoAlertPresentException ignored) {
+        }
+    }
+
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
@@ -85,7 +110,7 @@ public class BasePage {
         return incorrectUsername;
     }
 
-    public void fluentlyWait (WebElement element) {
+    public void fluentlyWait(WebElement element) {
         fluentWait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -121,3 +146,20 @@ public class BasePage {
         return size == b.size();
     }
 }
+
+
+//    protected Wait<WebDriver> fluentWait;
+//        fluentWait = new FluentWait<WebDriver>(driver)
+//                .withTimeout(Duration.ofSeconds(TIMEOUT))
+//                .pollingEvery(Duration.ofSeconds(POLLING))
+//                .ignoring(StaleElementReferenceException.class);
+//    public void waitForLoad(WebDriver driver) {
+//        ExpectedCondition<Boolean> pageLoadCondition = new
+//                ExpectedCondition<Boolean>() {
+//                    public Boolean apply(WebDriver driver) {
+//                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+//                    }
+//                };
+//        WebDriverWait wait = new WebDriverWait(driver, 30);
+//        wait.until(pageLoadCondition);
+//    }

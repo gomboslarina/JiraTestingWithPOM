@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
     }
 
     public void successfulLogin() {
-        login(username,password);
+        login(getUsername(),getPassword());
     }
 
     public void login(String user, String psw) {

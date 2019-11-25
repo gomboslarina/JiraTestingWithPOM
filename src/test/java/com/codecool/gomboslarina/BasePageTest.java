@@ -20,6 +20,8 @@ class BasePageTest {
     public void login() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.successfulLogin();
+        DashboardPage dashboardPage = new DashboardPage(getDriver());
+        dashboardPage.checkIfUserIsLoggedIn();
     }
 
     public void logout() {

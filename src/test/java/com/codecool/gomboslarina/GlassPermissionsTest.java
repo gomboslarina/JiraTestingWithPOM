@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GlassPermissionsTest extends BasePageTest {
 
-    LoginPage loginPage;
-    DashboardPage dashboardPage;
-    ProjectPermissionsPage projectPermissionsPage;
-    ProjectPage projectPage;
-    GlassDocumentationPage glassDocumentationPage;
+    private LoginPage loginPage;
+    private DashboardPage dashboardPage;
+    private ProjectPermissionsPage projectPermissionsPage;
+    private ProjectPage projectPage;
+    private GlassDocumentationPage glassDocumentationPage;
 
     @BeforeAll
     void setup() {

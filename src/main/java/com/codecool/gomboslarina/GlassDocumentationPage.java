@@ -89,10 +89,10 @@ public class GlassDocumentationPage extends BasePage{
         Map<String, List<Boolean>> permissions = new HashMap<>();
         for (WebElement row : tableRows) {
             List<Boolean> permissionTicks = new ArrayList<>();
-            List<WebElement> e = row.findElements(By.cssSelector("td.td-icon"));
-            IntStream.range(0, e.size()).forEach(i -> {
+            List<WebElement> iconElements = row.findElements(By.cssSelector("td.td-icon"));
+            IntStream.range(0, iconElements.size()).forEach(i -> {
                 try {
-                    e.get(i).findElement(By.cssSelector(".glass-true-icon"));
+                    iconElements.get(i).findElement(By.cssSelector(".glass-true-icon"));
                     permissionTicks.add(true);
                 } catch (Exception exception) {
                     permissionTicks.add(false);

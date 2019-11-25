@@ -15,6 +15,9 @@ public class DashboardPage extends BasePage{
     @FindBy(xpath = "//a[@id='log_out']")
     private WebElement logoutLink;
 
+    @FindBy(xpath = "//a[@id = 'create_link']")
+    private WebElement createButton;
+
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
@@ -24,7 +27,10 @@ public class DashboardPage extends BasePage{
         avatarPicture.click();
         waitForElementToBeClickable(viewProfile);
         viewProfile.click();
+    }
 
+    public void checkIfUserIsLoggedIn() {
+        waitForElementToAppear(avatarPicture);
     }
 
     public void logOut() {
@@ -32,6 +38,12 @@ public class DashboardPage extends BasePage{
         avatarPicture.click();
         waitForElementToBeClickable(logoutLink);
         logoutLink.click();
+    }
+
+    public void clickOnCreateButton() {
+//        waitForElementToAppear(createButton);
+        javascriptExecutor.executeScript("arguments[0].click()", createButton);
+//        createButton.click();
     }
 
 

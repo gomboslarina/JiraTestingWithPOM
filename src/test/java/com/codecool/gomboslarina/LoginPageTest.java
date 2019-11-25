@@ -1,9 +1,6 @@
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LoginPageTest extends BasePageTest {

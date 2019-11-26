@@ -35,6 +35,10 @@ public class IssuePage extends BasePage {
     @FindBy(xpath = "//aui-item-link[@id='delete-issue']")
     private WebElement deleteMenuItem;
 
+
+    @FindBy(xpath = "//div[@id='issue-content']//div[@class='issue-error']")
+    private WebElement issueError;
+
     @FindBy(xpath = "//textarea[@id='advanced-search']")
     private WebElement searchBar;
 
@@ -51,16 +55,6 @@ public class IssuePage extends BasePage {
             return issueName.equals(elementText);
         }
         return false;
-
-    }
-
-
-    public ArrayList<String> getCurrentValues() {
-        ArrayList<String> currentValues = new ArrayList<>();
-        currentValues.add(getIssueProject());
-        currentValues.add(getIssueType());
-        currentValues.add(getSummary());
-        return currentValues;
     }
 
     public String getIssueProject() {
@@ -92,5 +86,23 @@ public class IssuePage extends BasePage {
         moreOptions.click();
         waitForElementToBeClickable(deleteMenuItem);
         deleteMenuItem.click();
+    }
+
+    public boolean checkPermissionToEditIssue() {
+        try {
+            waitForElementToAppear(issueError);
+            System.out.println("You don't have permission to view the issue");
+            return false;
+        } catch (Exception e) {
+            try {
+                waitForElementToAppear(summaryValue);
+                waitForElementToBeClickable(editIssueButton);
+                System.out.println(true);
+                return true;
+            } catch (Exception ex) {
+                System.out.println("You don't have permission to edit the issue");
+                return false;
+            }
+        }
     }
 }

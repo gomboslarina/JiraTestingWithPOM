@@ -98,9 +98,9 @@ public class GlassDocumentationPage extends BasePage{
                     permissionTicks.add(false);
                 }
             });
-            System.out.println("GLassPermissionPage");
-            System.out.println(row.findElement(By.cssSelector(".title")).getText());
-            System.out.println(Arrays.toString(permissionTicks.toArray()));
+            // System.out.println("GLassPermissionPage");
+            // System.out.println(row.findElement(By.cssSelector(".title")).getText());
+            // System.out.println(Arrays.toString(permissionTicks.toArray()));
             permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
         }
         return permissions;

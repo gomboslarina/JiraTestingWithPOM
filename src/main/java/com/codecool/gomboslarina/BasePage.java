@@ -28,7 +28,7 @@ public class BasePage {
     private String incorrectPassword = System.getenv("INCORRECT_PASSWORD");
     private String incorrectUsername = System.getenv("INCORRECT_USERNAME");
 
-    private static final int TIMEOUT = 10;
+    private static final int TIMEOUT = 5;
     private static final int POLLING = 100;
 
     protected WebDriver driver;

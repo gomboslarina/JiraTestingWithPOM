@@ -34,7 +34,7 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void addProjectName(String projectName) {
-        waitForElementToAppear(projectField);
+//        waitForElementToBeClickable(projectField);
         projectField.click();
         projectField.sendKeys(projectName);
         projectField.sendKeys(Keys.TAB);
@@ -50,7 +50,7 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void addIssueType(String issueType) {
-        waitForElementToAppear(issueTypeField);
+//        waitForElementToBeClickable(issueTypeField);
         issueTypeField.click();
         issueTypeField.sendKeys(issueType);
         issueTypeField.sendKeys(Keys.TAB);
@@ -97,9 +97,9 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void cancelCreatingIssue() {
-        waitForElementToAppear(cancelButton);
+        waitForElementToBeClickable(cancelButton);
         cancelButton.click();
-        waitForElementToDisappear(cancelButton);
+//        waitForElementToDisappear(cancelButton);
     }
 
     /**
@@ -113,30 +113,10 @@ public class CreateIssuePopupPage extends BasePage {
     }
 
     public String getCurrentProject() {
-//        waitForElementToAppear(projectField);
         return projectField.getAttribute("value");
     }
 
     public String getCurrentIssueType() {
-//        waitForElementToAppear(issueTypeField);
         return issueTypeField.getAttribute("value");
     }
 }
-
-
-//    public ArrayList<String> addExpectedValues(String projectName, String issueType) {
-//        ArrayList<String> expectedValues = new ArrayList<>();
-//        expectedValues.add(projectName);
-//        expectedValues.add(issueType);
-//        addProjectName(projectName);
-//        waitForElementToDisappear(issueTypeField);
-//        addIssueType(issueType);
-//        return expectedValues;
-//    }
-//
-//    public ArrayList<String> getCurrentValues() {
-//        ArrayList<String> currentValues = new ArrayList<>();
-//        currentValues.add(projectField.getAttribute("value"));
-//        currentValues.add(issueTypeField.getAttribute("value"));
-//        return currentValues;
-//    }

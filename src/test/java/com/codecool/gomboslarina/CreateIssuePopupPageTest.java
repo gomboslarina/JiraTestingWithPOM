@@ -45,9 +45,10 @@ class CreateIssuePopupPageTest extends BasePageTest {
     public void checkIssuetypes(String projectName, String issueType) {
         dashboardPage.clickOnCreateButton();
         createIssuePopupPage.addExpectedValues(projectName, issueType);
-        Assertions.assertEquals(projectName, createIssuePopupPage.getCurrentProject());
-        Assertions.assertEquals(issueType, createIssuePopupPage.getCurrentIssueType());
+        String currentProject = createIssuePopupPage.getCurrentProject();
+        String currentIssueType = createIssuePopupPage.getCurrentIssueType();
         createIssuePopupPage.cancelCreatingIssue();
-//        createIssuePopupPage.handleAlert();
+        Assertions.assertEquals(projectName, currentProject);
+        Assertions.assertEquals(issueType, currentIssueType);
     }
 }

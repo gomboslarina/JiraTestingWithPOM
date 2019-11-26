@@ -144,15 +144,4 @@ public class ProjectPage extends BasePage {
         waitForElementToBeVisible(allProjectsList);
         return allProjectsList.isDisplayed();
     }
-
-    void goToPermissions() {
-        try {
-            fluentlyWait(projectSettingsLinkIcon);
-            projectSettingsLinkIcon.click();
-        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
-            projectSettingsLinkIcon.click();
-        }
-        waitForElementToBeClickable(projectPermissionsLink);
-        projectPermissionsLink.click();
-    }
 }

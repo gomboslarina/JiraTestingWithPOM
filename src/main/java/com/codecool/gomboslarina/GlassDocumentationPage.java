@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class GlassDocumentationPage extends BasePage{
 
@@ -85,18 +86,21 @@ public class GlassDocumentationPage extends BasePage{
     Map<String, List<Boolean>> getGlassPagePermissions() {
         List<WebElement> tableRows = permissionTable.findElements(By.cssSelector("tr.permtr"));
         //System.out.println(tableRows);
-        List<Boolean> permissionTicks = new ArrayList<>();
         Map<String, List<Boolean>> permissions = new HashMap<>();
         for (WebElement row : tableRows) {
-            List<WebElement> e = row.findElements(By.cssSelector("td.td-icon"));
-            for (int i = 0; i < e.size(); i++) {
+            List<Boolean> permissionTicks = new ArrayList<>();
+            List<WebElement> iconElements = row.findElements(By.cssSelector("td.td-icon"));
+            IntStream.range(0, iconElements.size()).forEach(i -> {
                 try {
-                    e.get(i).findElement(By.cssSelector("glass-true-icon"));
-                    permissionTicks.add(i, true);
+                    iconElements.get(i).findElement(By.cssSelector(".glass-true-icon"));
+                    permissionTicks.add(true);
                 } catch (Exception exception) {
-                    permissionTicks.add(i, false);
+                    permissionTicks.add(false);
                 }
-            }
+            });
+            // System.out.println("GLassPermissionPage");
+            // System.out.println(row.findElement(By.cssSelector(".title")).getText());
+            // System.out.println(Arrays.toString(permissionTicks.toArray()));
             permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
         }
         return permissions;

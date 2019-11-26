@@ -51,4 +51,10 @@ class CreateIssuePopupPageTest extends BasePageTest {
         Assertions.assertEquals(projectName, currentProject);
         Assertions.assertEquals(issueType, currentIssueType);
     }
+
+    @Test
+    public void createIssueWithoutRequiredField(){
+        dashboardPage.clickOnCreateButton();
+        Assertions.assertTrue(createIssuePopupPage.checkIfErrorMessageAppearsWithoutSummary());
+    }
 }

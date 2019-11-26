@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import javax.swing.text.html.parser.Element;
+
 public class DashboardPage extends BasePage{
 
     @FindBy(xpath = "//a[@id='header-details-user-fullname']")
@@ -33,6 +35,9 @@ public class DashboardPage extends BasePage{
     @FindBy(xpath = "//a[@id='issues_new_search_link_lnk']")
     private WebElement searchAllIssues;
 
+    @FindBy(xpath = "//div[@id='create-issue-dialog']")
+    private WebElement createIssueModal;
+
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
@@ -56,9 +61,12 @@ public class DashboardPage extends BasePage{
     }
 
     public void clickOnCreateButton() {
-//        waitForElementToAppear(createButton);
-        javascriptExecutor.executeScript("arguments[0].click()", createButton);
-//        createButton.click();
+        try {
+            waitForElementToDisappear(createIssueModal);
+        } catch (Exception e) {
+        }
+        waitForElementToBeClickable(createButton);
+        createButton.click();
     }
 
     public WebElement getProjectLink() {

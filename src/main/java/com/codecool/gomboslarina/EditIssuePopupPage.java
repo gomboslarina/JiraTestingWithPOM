@@ -16,8 +16,8 @@ public class EditIssuePopupPage extends BasePage {
     @FindBy(xpath = "//input[@id='edit-issue-submit']")
     private WebElement editIssueSumbit;
 
-    @FindBy(xpath = "//div[@id='aui-flag-container']//div[@class='aui-message aui-message-success success closeable shadowed aui-will-close']")
-    private WebElement issueUpdatedMessage;
+    @FindBy(xpath = "//div[@id='edit-issue-dialog']")
+    private WebElement editIssueDialog;
 
 
     public EditIssuePopupPage(WebDriver driver) {
@@ -29,6 +29,5 @@ public class EditIssuePopupPage extends BasePage {
         summaryField.clear();
         summaryField.sendKeys(summaryUpdate);
         editIssueSumbit.click();
-        waitForElementToDisappear(issueUpdatedMessage);
     }
 }

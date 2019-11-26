@@ -4,6 +4,9 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class EditIssuePopupPageTest extends BasePageTest {
     private IssuePage issuePage;
@@ -18,20 +21,17 @@ class EditIssuePopupPageTest extends BasePageTest {
         editIssuePopupPage = new EditIssuePopupPage(getDriver());
     }
 
-//    @AfterEach
-//    void closeTests() {
-//        super.shutDown();
-//    }
+    @AfterEach
+    void closeTests() {
+        super.shutDown();
+    }
 
     @Test
     public void editIssueHappyPath() {
         issuePage.navigateToPage("https://jira.codecool.codecanvas.hu/browse/MTP-746");
-        String currentSummary = issuePage.getSummary();
+        String updatedSummary = "Testing editing issue:" + new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date());
         issuePage.openEditIssue();
-        editIssuePopupPage.editIssue("Testing editing issue");
-        Assertions.assertEquals("Testing editing issue", issuePage.getSummary());
-        issuePage.openEditIssue();
-        editIssuePopupPage.editIssue(currentSummary);
+        editIssuePopupPage.editIssue(updatedSummary);
+        Assertions.assertEquals(updatedSummary, issuePage.getSummary());
     }
-
 }

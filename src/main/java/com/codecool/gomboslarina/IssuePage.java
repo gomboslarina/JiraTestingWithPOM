@@ -74,6 +74,10 @@ public class IssuePage extends BasePage {
     }
 
     public String getSummary() {
+        try {
+            waitForElementToDisappear(summaryValue);
+        } catch (Exception ex) {
+        }
         waitForElementToAppear(summaryValue);
         return summaryValue.getText();
     }

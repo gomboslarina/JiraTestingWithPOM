@@ -45,7 +45,7 @@ public class LoginPage extends BasePage {
         try {
             waitForElementToAppear(errorMessage);
             return true;
-        } catch (NullPointerException e) {
+            } catch (NullPointerException e) {
             return false;
         }
     }

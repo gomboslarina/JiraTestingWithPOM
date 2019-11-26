@@ -3,12 +3,19 @@ package com.codecool.gomboslarina;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 public class BasePage {
 
@@ -26,14 +33,19 @@ public class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected FluentWait<WebDriver> fluentWait;
     protected JavascriptExecutor javascriptExecutor;
 
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, TIMEOUT, POLLING);
-         javascriptExecutor = (JavascriptExecutor) driver;
+        fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(TIMEOUT))
+                .pollingEvery(Duration.ofSeconds(POLLING))
+                .ignoring(org.openqa.selenium.ElementClickInterceptedException.class);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
+        javascriptExecutor = (JavascriptExecutor) driver;
     }
 
     protected void navigateToPage(String url) {
@@ -44,8 +56,17 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    protected WebElement waitForElementToBeVisible(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        return element;
+    }
+
     protected void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected boolean isElementVisible(WebElement element) {
+        return element.isDisplayed();
     }
 
     protected void waitForElementToDisappear(WebElement element) {
@@ -61,7 +82,7 @@ public class BasePage {
         try {
             Alert alt = driver.switchTo().alert();
             alt.accept();
-        } catch(NoAlertPresentException ignored) {
+        } catch (NoAlertPresentException ignored) {
         }
     }
 
@@ -89,7 +110,9 @@ public class BasePage {
         return incorrectUsername;
     }
 
-
+    public void fluentlyWait(WebElement element) {
+        fluentWait.until(ExpectedConditions.visibilityOf(element));
+    }
 }
 
 

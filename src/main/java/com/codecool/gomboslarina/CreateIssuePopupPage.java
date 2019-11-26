@@ -25,6 +25,9 @@ public class CreateIssuePopupPage extends BasePage {
     @FindBy(xpath = "//div[@id='create-issue-dialog']//a[@class='cancel']")
     private WebElement cancelButton;
 
+    @FindBy(xpath = "//div[@id='create-issue-dialog']//div[@class='error']")
+    private WebElement errorMessage;
+
     public CreateIssuePopupPage(WebDriver driver) {
         super(driver);
     }
@@ -34,7 +37,6 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void addProjectName(String projectName) {
-        waitForElementToAppear(projectField);
         projectField.click();
         projectField.sendKeys(projectName);
         projectField.sendKeys(Keys.TAB);
@@ -50,7 +52,6 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void addIssueType(String issueType) {
-        waitForElementToAppear(issueTypeField);
         issueTypeField.click();
         issueTypeField.sendKeys(issueType);
         issueTypeField.sendKeys(Keys.TAB);
@@ -84,6 +85,17 @@ public class CreateIssuePopupPage extends BasePage {
     }
 
     /**
+     * Create new issue - without filling out the all the required fields, check if error message appears;
+     */
+
+    public boolean checkIfErrorMessageAppearsWithoutSummary() {
+        createIssueSumbit.click();
+        waitForElementToAppear(errorMessage);
+        return errorMessage.isDisplayed();
+    }
+
+
+    /**
      * Success message popup - link navigates to issue page;
      */
 
@@ -97,9 +109,8 @@ public class CreateIssuePopupPage extends BasePage {
      */
 
     public void cancelCreatingIssue() {
-        waitForElementToAppear(cancelButton);
+        waitForElementToBeClickable(cancelButton);
         cancelButton.click();
-        waitForElementToDisappear(cancelButton);
     }
 
     /**

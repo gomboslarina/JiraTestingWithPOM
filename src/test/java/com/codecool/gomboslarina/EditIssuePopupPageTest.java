@@ -1,6 +1,8 @@
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 
@@ -10,7 +12,7 @@ class EditIssuePopupPageTest extends BasePageTest {
     private EditIssuePopupPage editIssuePopupPage;
     private DashboardPage dashboardPage;
 
-    @BeforeEach
+    @BeforeAll
     void setup() {
         super.setUp();
         login();
@@ -18,10 +20,10 @@ class EditIssuePopupPageTest extends BasePageTest {
         editIssuePopupPage = new EditIssuePopupPage(getDriver());
     }
 
-//    @AfterEach
-//    void closeTests() {
-//        super.shutDown();
-//    }
+    @AfterAll
+    void closeTests() {
+        super.shutDown();
+    }
 
     @Test
     public void editIssueHappyPath() {
@@ -33,5 +35,13 @@ class EditIssuePopupPageTest extends BasePageTest {
         issuePage.openEditIssue();
         editIssuePopupPage.editIssue(currentSummary);
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/EditIssue.csv")
+    public void checkIfIssuesAreEditable(String issue) {
+        issuePage.navigateToPage(issue);
+        Assertions.assertTrue(issuePage.checkPermissionToEditIssue());
+    }
+
 
 }

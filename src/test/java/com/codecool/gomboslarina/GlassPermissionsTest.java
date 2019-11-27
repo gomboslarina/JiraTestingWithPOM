@@ -1,9 +1,6 @@
 package com.codecool.gomboslarina;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +28,7 @@ public class GlassPermissionsTest extends BasePageTest {
 
     @Test
     void areGlassPermissionsParallelWithProjectPermissions() {
-        projectPermissionsPage.areProjectAndGlassPermissionsEqual(projectPage, glassDocumentationPage);
+        Assertions.assertTrue(projectPermissionsPage.areProjectAndGlassPermissionsEqual(projectPage, glassDocumentationPage));
     }
 
     @AfterAll

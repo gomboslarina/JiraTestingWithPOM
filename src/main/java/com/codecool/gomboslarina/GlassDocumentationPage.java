@@ -35,6 +35,10 @@ public class GlassDocumentationPage extends BasePage{
     @FindBy(xpath = "//*[@id='glass-permissions-panel']/div/table/tbody")
     private WebElement permissionTable;
 
+    @FindBy(xpath = "//aui-dropdown-menu[@id='dropdown-issuetypes']//aui-item-link")
+    private List<WebElement> issueTypesGlass;
+
+
     private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
 
     public String getPageUrl() {
@@ -104,5 +108,16 @@ public class GlassDocumentationPage extends BasePage{
             permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
         }
         return permissions;
+    }
+
+    List findIssueTypesOnGlass() {
+        navigateToPage("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass");
+        List<String> issueTypes = new ArrayList<>();
+        for (WebElement issueType : issueTypesGlass
+        ) {
+            issueTypes.add(issueType.getAttribute("data-issue-type"));
+        }
+        Collections.sort(issueTypes);
+        return issueTypes;
     }
 }

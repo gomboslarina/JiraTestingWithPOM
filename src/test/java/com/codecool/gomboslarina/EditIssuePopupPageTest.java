@@ -3,8 +3,6 @@ package com.codecool.gomboslarina;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +11,6 @@ import java.util.Date;
 class EditIssuePopupPageTest extends BasePageTest {
     private IssuePage issuePage;
     private EditIssuePopupPage editIssuePopupPage;
-    private DashboardPage dashboardPage;
 
     @BeforeAll
     void setup() {

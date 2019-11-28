@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class GlassDocumentationPage extends BasePage {
+public class GlassDocumentationPage extends Components {
 
     GlassDocumentationPage(WebDriver driver) {
         super(driver);
@@ -37,27 +37,6 @@ public class GlassDocumentationPage extends BasePage {
 
     @FindBy(xpath = "//aui-dropdown-menu[@id='dropdown-issuetypes']//aui-item-link")
     private List<WebElement> issueTypesGlass;
-
-    @FindBy(xpath = "//table[@id='components-table']/tbody[@class='header']/tr/th")
-    private List<WebElement> componentHeaders;
-
-    @FindBy(xpath = "//table[@id='components-table']/tbody[@class='items']//td[@class='components-table__name']")
-    private List<WebElement> componentNames;
-
-    public HashMap<String, String> findComponent(String compName) {
-        HashMap<String, String> component = new HashMap<String, String>();
-        List<WebElement> tableData = new ArrayList<>();
-        for (WebElement componentName : componentNames) {
-            if (componentName.getText().equals(compName)) {
-                tableData.add(componentName);
-                tableData.addAll(componentName.findElements(By.xpath("following-sibling::*")));
-            }
-        }
-        for (int i = 0; i < componentHeaders.size(); i++) {
-            component.put(componentHeaders.get(i).getText(), tableData.get(i).getText());
-        }
-        return component;
-    }
 
     private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
 

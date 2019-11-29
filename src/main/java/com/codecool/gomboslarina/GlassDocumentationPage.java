@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class GlassDocumentationPage extends BasePage{
+public class GlassDocumentationPage extends Components {
 
     GlassDocumentationPage(WebDriver driver) {
         super(driver);
@@ -37,7 +37,6 @@ public class GlassDocumentationPage extends BasePage{
 
     @FindBy(xpath = "//aui-dropdown-menu[@id='dropdown-issuetypes']//aui-item-link")
     private List<WebElement> issueTypesGlass;
-
 
     private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
 

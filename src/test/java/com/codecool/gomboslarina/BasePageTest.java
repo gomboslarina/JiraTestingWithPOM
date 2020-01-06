@@ -5,16 +5,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BasePageTest {
     private static String driverPath = System.getenv("DRIVERPATH");
     private WebDriver driver;
+    Grid grid;
 
+    /*
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+     */
+
+    public void setUp() {
+        grid = new Grid();
+        grid.setupLinuxChrome();
     }
 
     public void login() {

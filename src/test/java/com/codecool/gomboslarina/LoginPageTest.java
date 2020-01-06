@@ -11,9 +11,9 @@ class LoginPageTest extends BasePageTest {
     @BeforeEach
     void setup() {
         super.setUp();
-        loginPage = new LoginPage(getDriver());
-        dashboardPage = new DashboardPage(getDriver());
-        profilePage = new ProfilePage(getDriver());
+        loginPage = new LoginPage(grid.getDriver());
+        dashboardPage = new DashboardPage(grid.getDriver());
+        profilePage = new ProfilePage(grid.getDriver());
     }
 
     @AfterEach

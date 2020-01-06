@@ -1,0 +1,9 @@
+platform,browser
+mac,firefox
+mac,chrome
+mac,safari
+linux,firefox
+linux,chrome
+windows,firefox
+windows,chrome
+windows,ie

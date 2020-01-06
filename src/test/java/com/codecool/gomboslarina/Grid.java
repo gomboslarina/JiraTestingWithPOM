@@ -11,99 +11,41 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class Grid {
 
     private WebDriver driver;
-    private String baseURL = System.getenv("BASEURL"); // NOT YET working with env vars, need to write the url!!!
-    private String nodeURL = System.getenv("NODEURL"); // NOT YET working with env vars, need to write the url!!!
+    private String nodeURL = System.getenv("NODEURL");
 
-    public void setupMacFox() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.firefox();
-        capability.setBrowserName("firefox");
-        capability.setPlatform(Platform.MAC);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupMacSafari() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.safari();
-        capability.setBrowserName("safari");
-        capability.setPlatform(Platform.MAC);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupMacChrome() throws MalformedURLException {
+    public void setupEnvironment(String platform, String browser) {
         DesiredCapabilities capability = DesiredCapabilities.chrome();
-        capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.MAC);
+        switch (browser) {
+            case "firefox":
+                capability = DesiredCapabilities.firefox();
+                break;
+            case "chrome":
+                capability = DesiredCapabilities.chrome();
+                break;
+            case "ie":
+                capability = DesiredCapabilities.internetExplorer();
+                break;
+            case "safari":
+                capability = DesiredCapabilities.safari();
+                break;
+        }
+
+        switch (platform) {
+            case "mac":
+                capability.setPlatform(Platform.MAC);
+                break;
+            case "linux":
+                capability.setPlatform(Platform.LINUX);
+                break;
+            case "windows":
+                capability.setPlatform(Platform.WINDOWS);
+                break;
+        }
         try {
             driver = new RemoteWebDriver(new URL(nodeURL), capability);
         } catch (MalformedURLException me) {
             System.out.println(me.toString());
         }
-    }
-
-    public void setupLinuxFox() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.firefox();
-        capability.setBrowserName("firefox");
-        capability.setPlatform(Platform.LINUX);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupLinuxChrome() {
-        DesiredCapabilities capability = DesiredCapabilities.chrome();
-        capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.LINUX);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupWinIE() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
-        capability.setBrowserName("internetExplorer");
-        capability.setPlatform(Platform.WINDOWS);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupWinFox() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.firefox();
-        capability.setBrowserName("firefox");
-        capability.setPlatform(Platform.WINDOWS);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public void setupWinChrome() throws MalformedURLException {
-        DesiredCapabilities capability = DesiredCapabilities.chrome();
-        capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.WINDOWS);
-        try {
-            driver = new RemoteWebDriver(new URL(nodeURL), capability);
-        } catch (MalformedURLException me) {
-            System.out.println(me.toString());
-        }
-    }
-
-    public String getBaseURL() {
-        return baseURL;
     }
 
     public WebDriver getDriver() {

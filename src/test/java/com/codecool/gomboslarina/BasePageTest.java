@@ -18,9 +18,11 @@ class BasePageTest {
     }
      */
 
-    public void setUp() {
+    public void setUp() {}
+
+    public void setUp2(String platform, String browser) {
         grid = new Grid();
-        grid.setupLinuxChrome();
+        grid.setupEnvironment(platform, browser);
     }
 
     public void login() {

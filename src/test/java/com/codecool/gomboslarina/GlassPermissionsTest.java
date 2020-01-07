@@ -26,7 +26,7 @@ public class GlassPermissionsTest extends BasePageTest {
         grid.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Test
+    @Test // Pass - remote: pass
     void areGlassPermissionsParallelWithProjectPermissions() {
         Assertions.assertTrue(projectPermissionsPage.areProjectAndGlassPermissionsEqual(projectPage, glassDocumentationPage));
     }

@@ -14,10 +14,10 @@ class EditIssuePopupPageTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
-        login();
-        issuePage = new IssuePage(getDriver());
-        editIssuePopupPage = new EditIssuePopupPage(getDriver());
+        super.setUp("linux", "chrome");
+        verifiedLogin();
+        issuePage = new IssuePage(grid.getDriver());
+        editIssuePopupPage = new EditIssuePopupPage(grid.getDriver());
     }
 
     @AfterAll
@@ -25,6 +25,7 @@ class EditIssuePopupPageTest extends BasePageTest {
         super.shutDown();
     }
 
+    // Pass - remote: pass
     @Test
     public void editIssueHappyPath() {
         issuePage.navigateToPage("https://jira.codecool.codecanvas.hu/browse/MTP-746");
@@ -34,6 +35,7 @@ class EditIssuePopupPageTest extends BasePageTest {
         Assertions.assertEquals(updatedSummary, issuePage.getSummary());
     }
 
+    // 2 pass, rest fail - remote: same
     @ParameterizedTest
     @CsvFileSource(resources = "/EditIssue.csv")
     public void checkIfIssuesAreEditable(String issue) {

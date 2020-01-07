@@ -15,15 +15,15 @@ public class GlassPermissionsTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
-        loginPage = new LoginPage(getDriver());
-        dashboardPage = new DashboardPage(getDriver());
-        projectPermissionsPage = new ProjectPermissionsPage(getDriver());
-        projectPage = new ProjectPage(getDriver());
-        glassDocumentationPage = new GlassDocumentationPage(getDriver());
+        super.setUp("linux", "chrome");
+        loginPage = new LoginPage(grid.getDriver());
+        dashboardPage = new DashboardPage(grid.getDriver());
+        projectPermissionsPage = new ProjectPermissionsPage(grid.getDriver());
+        projectPage = new ProjectPage(grid.getDriver());
+        glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
         loginPage.successfulLogin();
         dashboardPage.goToPrivateProjectPage();
-        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        grid.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test

@@ -14,11 +14,11 @@ public class BrowseProjectTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
-        loginPage = new LoginPage(getDriver());
-        dashboardPage = new DashboardPage(getDriver());
-        searchProjectPage = new SearchProjectPage(getDriver());
-        projectPage = new ProjectPage(getDriver());
+        super.setUp("linux", "chrome");
+        loginPage = new LoginPage(grid.getDriver());
+        dashboardPage = new DashboardPage(grid.getDriver());
+        searchProjectPage = new SearchProjectPage(grid.getDriver());
+        projectPage = new ProjectPage(grid.getDriver());
         loginPage.successfulLogin();
     }
 
@@ -27,11 +27,13 @@ public class BrowseProjectTest extends BasePageTest {
         dashboardPage.goToAllProjectSearchPage();
     }
 
+    // Pass - remote pass
     @Test
     void isAllProjectsListDisplayed() {
         Assertions.assertTrue(projectPage.isAllProjectsListDisplayed());
     }
 
+    // Pass - remote changes all the time: 1 pass, 3 fails, 2 pass, 2 fails...
     // it's all tests, including TOUCAN/JETI/COALA
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)

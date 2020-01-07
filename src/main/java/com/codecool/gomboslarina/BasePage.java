@@ -6,27 +6,17 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.Map;
 
 public class BasePage {
 
-    static String driverPath = System.getenv("DRIVERPATH");
-    WebDriver webDriver;
-    String url = "https://jira.codecool.codecanvas.hu/";
-    private String username = System.getenv("USERNAME");
-    private String password = System.getenv("PASSWORD");
-    private String email = System.getenv("EMAIL");
-    private String incorrectPassword = System.getenv("INCORRECT_PASSWORD");
-    private String incorrectUsername = System.getenv("INCORRECT_USERNAME");
+    String url;
+    private String username;
+    private String password;
+    private String email;
+    private String incorrectPassword;
+    private String incorrectUsername;
 
     private static final int TIMEOUT = 5;
     private static final int POLLING = 100;
@@ -39,6 +29,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        PropertiesReader reader = new PropertiesReader();
         wait = new WebDriverWait(driver, TIMEOUT, POLLING);
         fluentWait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(TIMEOUT))
@@ -46,6 +37,12 @@ public class BasePage {
                 .ignoring(org.openqa.selenium.ElementClickInterceptedException.class);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
         javascriptExecutor = (JavascriptExecutor) driver;
+        url = reader.getBaseUrl();
+        username = reader.getUsername();
+        password = reader.getPassword();
+        email = reader.getEmail();
+        incorrectPassword = reader.getIncorrectPassword();
+        incorrectUsername = reader.getIncorrectUsername();
     }
 
     protected void navigateToPage(String url) {
@@ -76,7 +73,6 @@ public class BasePage {
 //    protected void waitForElementNotToExist() {
 //        wait.until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated()))
 //    }
-
 
     public void handleAlert() {
         try {

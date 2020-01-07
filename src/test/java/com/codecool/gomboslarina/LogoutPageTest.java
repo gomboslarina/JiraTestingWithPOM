@@ -2,18 +2,16 @@ package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class LogoutPageTest extends BasePageTest {
     private LogoutPage logoutPage;
 
     @BeforeEach
     public void setup() {
-        super.setUp();
-        login();
+        super.setUp("linux", "chrome");
+        verifiedLogin();
         logout();
-        logoutPage = new LogoutPage(getDriver());
+        logoutPage = new LogoutPage(grid.getDriver());
     }
 
     @AfterEach
@@ -21,6 +19,7 @@ class LogoutPageTest extends BasePageTest {
         super.shutDown();
     }
 
+    // Pass - remote: pass
     @Test
     public void loginLinkAppearsIfUserLogsOut() {
         Assertions.assertTrue(logoutPage.checkIfUserIsLoggedOut());

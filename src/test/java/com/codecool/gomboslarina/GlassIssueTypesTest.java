@@ -4,15 +4,16 @@ import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GlassIssueTypesTest extends BasePageTest {
-    GlassDocumentationPage glassDocumentationPage;
-    ProjectIssueTypesPage projectIssueTypesPage;
+
+    private GlassDocumentationPage glassDocumentationPage;
+    private ProjectIssueTypesPage projectIssueTypesPage;
 
     @BeforeAll
     public void setUp() {
-        super.setUp();
-        login();
-        glassDocumentationPage = new GlassDocumentationPage(getDriver());
-        projectIssueTypesPage = new ProjectIssueTypesPage(getDriver());
+        super.setUp("linux", "chrome");
+        verifiedLogin();
+        glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
+        projectIssueTypesPage = new ProjectIssueTypesPage(grid.getDriver());
     }
 
     @AfterAll
@@ -20,6 +21,7 @@ class GlassIssueTypesTest extends BasePageTest {
         super.shutDown();
     }
 
+    // Pass - remote: pass
     @Test
     void checkIssueTypes() {
         Assertions.assertIterableEquals(projectIssueTypesPage.findIssueTypes(), glassDocumentationPage.findIssueTypesOnGlass());

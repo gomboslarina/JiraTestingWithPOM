@@ -4,23 +4,19 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class CreateIssuePopupPageTest extends BasePageTest {
+class CreateIssuePopupPageTest extends BasePageTest { // remote: if these running parallel, they fail because elementclickintercepted exception
     private CreateIssuePopupPage createIssuePopupPage;
     private IssuePage issuePage;
     private DashboardPage dashboardPage;
 
     @BeforeAll
     public void setup() {
-        super.setUp();
-        login();
-        dashboardPage = new DashboardPage(getDriver());
-        createIssuePopupPage = new CreateIssuePopupPage(getDriver());
-        issuePage = new IssuePage(getDriver());
+        super.setUp("linux", "chrome");
+        verifiedLogin();
+        dashboardPage = new DashboardPage(grid.getDriver());
+        createIssuePopupPage = new CreateIssuePopupPage(grid.getDriver());
+        issuePage = new IssuePage(grid.getDriver());
     }
 
     @AfterAll
@@ -28,6 +24,7 @@ class CreateIssuePopupPageTest extends BasePageTest {
         super.shutDown();
     }
 
+    // Pass - remote: pass
     @ParameterizedTest
     @CsvFileSource(resources = "/CreateIssue.csv")
     public void createIssueHappyPath(String projectName, String issueType, String summary) {
@@ -40,6 +37,7 @@ class CreateIssuePopupPageTest extends BasePageTest {
         issuePage.deleteIssue();
     }
 
+    // Toucan, Jeti fail, 3 Coala pass, 1 fail - remote: same
     @ParameterizedTest
     @CsvFileSource(resources = "/CheckIssueTypes.csv")
     public void checkIssuetypes(String projectName, String issueType) {
@@ -52,6 +50,7 @@ class CreateIssuePopupPageTest extends BasePageTest {
         Assertions.assertEquals(issueType, currentIssueType);
     }
 
+    // Pass - remote: pass
     @Test
     public void createIssueWithoutRequiredField(){
         dashboardPage.clickOnCreateButton();

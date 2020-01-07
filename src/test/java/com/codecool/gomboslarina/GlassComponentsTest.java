@@ -4,33 +4,35 @@ import org.junit.jupiter.api.*;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class GlassComponentsTest extends BasePageTest {
-    ProjectComponentsPage projectComponentsPage;
-    GlassDocumentationPage glassDocumentationPage;
+
+    private ProjectComponentsPage projectComponentsPage;
+    private GlassDocumentationPage glassDocumentationPage;
+    private PropertiesReader propertiesReader;
 
     @BeforeAll
     public void setup() {
-        setUp();
-        login();
-        projectComponentsPage = new ProjectComponentsPage(getDriver());
-        glassDocumentationPage = new GlassDocumentationPage(getDriver());
+        super.setUp("linux", "chrome");
+        projectComponentsPage = new ProjectComponentsPage(grid.getDriver());
+        glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
+        propertiesReader = new PropertiesReader();
+        verifiedLogin();
     }
 
     @AfterAll
     public void closeTests() {
-        shutDown();
+        shutDown2();
     }
 
+    // Pass - remote: pass
     @Test
     public void createComponentWithAllTheData() {
         List<String> expectedComponents = projectComponentsPage.getComponentData(
-                "https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page",
-                "TestComponent");
-        List<String> glassComponents = glassDocumentationPage.getComponentData("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass",
-                "TestComponent");
+                propertiesReader.getComponentsUrl(),
+                propertiesReader.getComponentsName());
+        List<String> glassComponents = glassDocumentationPage.getComponentData(propertiesReader.getGlassComponentsUrl(),
+                propertiesReader.getComponentsName());
         Assertions.assertIterableEquals(expectedComponents, glassComponents);
     }
 

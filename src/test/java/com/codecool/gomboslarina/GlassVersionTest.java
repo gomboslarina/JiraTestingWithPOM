@@ -14,16 +14,17 @@ public class GlassVersionTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
-        loginPage = new LoginPage(getDriver());
-        glassDocumentationPage = new GlassDocumentationPage(getDriver());
-        dashboardPage = new DashboardPage(getDriver());
-        projectPage = new ProjectPage(getDriver());
+        super.setUp("linux", "chrome");
+        loginPage = new LoginPage(grid.getDriver());
+        glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
+        dashboardPage = new DashboardPage(grid.getDriver());
+        projectPage = new ProjectPage(grid.getDriver());
         loginPage.successfulLogin();
         dashboardPage.goToPrivateProjectPage();
         projectPage.clickOnGlassLink();
     }
 
+    // Pass - remote: pass
     @Test
     void isGlassVersionUpToDate() {
         List<String> glassVersion = glassDocumentationPage.getGlassVersionAttributes();

@@ -10,37 +10,58 @@ class BasePageTest {
     private WebDriver driver;
     Grid grid;
 
-    /*
+/*
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
-     */
+*/
 
-    public void setUp() {}
-
-    public void setUp2(String platform, String browser) {
+    public void setUp(String platform, String browser) {
         grid = new Grid();
         grid.setupEnvironment(platform, browser);
+        grid.getDriver().manage().window().maximize();
     }
 
-    public void login() {
-        LoginPage loginPage = new LoginPage(getDriver());
+    public void verifiedLogin() {
+        LoginPage loginPage = new LoginPage(grid.getDriver());
         loginPage.successfulLogin();
-        DashboardPage dashboardPage = new DashboardPage(getDriver());
+        DashboardPage dashboardPage = new DashboardPage(grid.getDriver());
         dashboardPage.checkIfUserIsLoggedIn();
     }
+/*
+ public void verifiedLogin() {
+     LoginPage loginPage = new LoginPage(getDriver());
+     loginPage.successfulLogin();
+     DashboardPage dashboardPage = new DashboardPage(getDriver());
+     dashboardPage.checkIfUserIsLoggedIn();
+ }
+ */
 
     public void logout() {
-        DashboardPage dashboardPage = new DashboardPage(getDriver());
+        DashboardPage dashboardPage = new DashboardPage(grid.getDriver());
         dashboardPage.logOut();
     }
 
+ /*
+ public void logout() {
+     DashboardPage dashboardPage = new DashboardPage(getDriver());
+     dashboardPage.logOut();
+ }
+
+  */
     public void shutDown() {
-        if (null != driver) {
-            driver.close();
-            driver.quit();
+        if (null != grid.getDriver()) {
+            grid.getDriver().close();
+            grid.getDriver().quit();
+        }
+    }
+
+    public void shutDown2() {
+        if (null != getDriver()) {
+            getDriver().close();
+            getDriver().quit();
         }
     }
 
@@ -49,6 +70,6 @@ class BasePageTest {
     }
 
     public void implicitlyWait() {
-        driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+        grid.getDriver().manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     }
 }

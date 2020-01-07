@@ -14,11 +14,11 @@ public class BrowseIssueTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
-        loginPage = new LoginPage(getDriver());
-        dashboardPage = new DashboardPage(getDriver());
-        projectPage = new ProjectPage(getDriver());
-        issuePage = new IssuePage(getDriver());
+        super.setUp("linux", "chrome");
+        loginPage = new LoginPage(grid.getDriver());
+        dashboardPage = new DashboardPage(grid.getDriver());
+        projectPage = new ProjectPage(grid.getDriver());
+        issuePage = new IssuePage(grid.getDriver());
         loginPage.successfulLogin();
     }
 
@@ -27,13 +27,15 @@ public class BrowseIssueTest extends BasePageTest {
         dashboardPage.goToSearchIssuesPage();
     }
 
+
+    // Pass - remote: pass
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)
     void isIssueListAvailableOnProjectPage(String project) {
         Assertions.assertTrue(projectPage.checkIssueListIsAvailable(project));
     }
 
-
+    // Fail - remote: fail
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseIssue.csv", numLinesToSkip = 1)
     void areSpecificIssuesAvailable(String issueName) {

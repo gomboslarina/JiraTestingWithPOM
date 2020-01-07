@@ -9,8 +9,8 @@ class LoginPageTest extends BasePageTest {
     private ProfilePage profilePage;
 
     @BeforeEach
-    void setup(String platform, String browser) {
-        super.setUp2(platform, browser);
+    void setup() {
+        super.setUp("linux", "chrome");
         loginPage = new LoginPage(grid.getDriver());
         dashboardPage = new DashboardPage(grid.getDriver());
         profilePage = new ProfilePage(grid.getDriver());
@@ -21,6 +21,7 @@ class LoginPageTest extends BasePageTest {
         super.shutDown();
     }
 
+    // Pass - remote: pass
     @Test
     void ShouldReturnTrueWithCorrectLoginDetails() {
         loginPage.login(loginPage.getUsername(), loginPage.getPassword());
@@ -30,18 +31,21 @@ class LoginPageTest extends BasePageTest {
         dashboardPage.logOut();
     }
 
+    // Pass - remote: pass
     @Test
     void ShouldReturnErrorLoginMessage() {
         loginPage.login(loginPage.getIncorrectUsername(), loginPage.getIncorrectPassword());
         Assertions.assertTrue(loginPage.checkIfErrorMessageAppears());
     }
 
+    // Pass - remote: pass
     @Test
     void ShouldReturnErrorWithEmptyLoginFields() {
         loginPage.login("", "");
         Assertions.assertTrue(loginPage.checkIfErrorMessageAppears());
     }
 
+    // Pass - remote: pass
     @Test
     void ShouldRememberLoginData() {
         Assertions.assertTrue(loginPage.checkIfCheckboxIsSelected());

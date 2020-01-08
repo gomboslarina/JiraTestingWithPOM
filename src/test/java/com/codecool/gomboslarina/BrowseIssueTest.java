@@ -32,6 +32,7 @@ public class BrowseIssueTest extends BasePageTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)
     void isIssueListAvailableOnProjectPage(String project) {
+        capability.setCapability("name", "isIssueListAvailableOnProjectPage");
         Assertions.assertTrue(projectPage.checkIssueListIsAvailable(project));
     }
 
@@ -39,6 +40,7 @@ public class BrowseIssueTest extends BasePageTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseIssue.csv", numLinesToSkip = 1)
     void areSpecificIssuesAvailable(String issueName) {
+        capability.setCapability("name", "areSpecificIssuesAvailable");
         Assertions.assertTrue(issuePage.searchForIssues(issueName));
     }
 

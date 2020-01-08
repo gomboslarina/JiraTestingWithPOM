@@ -2,6 +2,7 @@ package com.codecool.gomboslarina;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +10,7 @@ class BasePageTest {
     private static String driverPath = System.getenv("DRIVERPATH");
     private WebDriver driver;
     Grid grid;
+    DesiredCapabilities capability;
 
 /*
     public void setUp() {
@@ -22,6 +24,7 @@ class BasePageTest {
         grid = new Grid();
         grid.setupEnvironment(platform, browser);
         grid.getDriver().manage().window().maximize();
+        capability = grid.getCapability();
     }
 
     public void verifiedLogin() {

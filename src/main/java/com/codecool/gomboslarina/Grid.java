@@ -14,6 +14,7 @@ public class Grid {
 
     private WebDriver driver;
     private String nodeURL;
+    private DesiredCapabilities capability;
 
     Grid() {
        PropertiesReader reader = new PropertiesReader();
@@ -21,7 +22,7 @@ public class Grid {
     }
 
     public void setupEnvironment(String platform, String browser) {
-        DesiredCapabilities capability = DesiredCapabilities.chrome();
+        this.capability = DesiredCapabilities.chrome();
         switch (browser) {
             case "firefox":
                 capability = DesiredCapabilities.firefox();
@@ -57,5 +58,9 @@ public class Grid {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public DesiredCapabilities getCapability() {
+        return capability;
     }
 }

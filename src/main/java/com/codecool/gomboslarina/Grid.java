@@ -21,7 +21,7 @@ public class Grid {
        nodeURL = reader.getNodeUrl();
     }
 
-    public void setupEnvironment(String platform, String browser) {
+    public void setupEnvironment(String platform, String browser, String testName) {
         this.capability = DesiredCapabilities.chrome();
         switch (browser) {
             case "firefox":
@@ -49,6 +49,7 @@ public class Grid {
                 capability.setPlatform(Platform.WINDOWS);
                 break;
         }
+        capability.setCapability("name", testName);
         try {
             driver = new RemoteWebDriver(new URL(nodeURL), capability);
         } catch (MalformedURLException me) {

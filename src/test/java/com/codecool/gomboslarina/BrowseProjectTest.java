@@ -14,7 +14,7 @@ public class BrowseProjectTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName());
         loginPage = new LoginPage(grid.getDriver());
         dashboardPage = new DashboardPage(grid.getDriver());
         searchProjectPage = new SearchProjectPage(grid.getDriver());

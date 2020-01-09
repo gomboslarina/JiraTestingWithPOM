@@ -14,12 +14,13 @@ public class BrowseIssueTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName());
         loginPage = new LoginPage(grid.getDriver());
         dashboardPage = new DashboardPage(grid.getDriver());
         projectPage = new ProjectPage(grid.getDriver());
         issuePage = new IssuePage(grid.getDriver());
         loginPage.successfulLogin();
+        capability.setCapability("name",this.getClass().getName());
     }
 
     @BeforeEach
@@ -32,7 +33,6 @@ public class BrowseIssueTest extends BasePageTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/BrowseProject.csv", numLinesToSkip = 1)
     void isIssueListAvailableOnProjectPage(String project) {
-        capability.setCapability("name", "isIssueListAvailableOnProjectPage");
         Assertions.assertTrue(projectPage.checkIssueListIsAvailable(project));
     }
 

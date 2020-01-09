@@ -12,7 +12,7 @@ class CreateIssuePopupPageTest extends BasePageTest { // remote: if these runnin
 
     @BeforeAll
     public void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName());
         verifiedLogin();
         dashboardPage = new DashboardPage(grid.getDriver());
         createIssuePopupPage = new CreateIssuePopupPage(grid.getDriver());

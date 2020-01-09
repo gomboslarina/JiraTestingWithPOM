@@ -8,7 +8,7 @@ class LogoutPageTest extends BasePageTest {
 
     @BeforeEach
     public void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName().substring(26));
         verifiedLogin();
         logout();
         logoutPage = new LogoutPage(grid.getDriver());

@@ -14,7 +14,7 @@ class EditIssuePopupPageTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName().substring(26));
         verifiedLogin();
         issuePage = new IssuePage(grid.getDriver());
         editIssuePopupPage = new EditIssuePopupPage(grid.getDriver());

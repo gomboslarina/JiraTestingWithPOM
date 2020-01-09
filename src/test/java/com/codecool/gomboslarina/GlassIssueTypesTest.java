@@ -10,7 +10,7 @@ class GlassIssueTypesTest extends BasePageTest {
 
     @BeforeAll
     public void setUp() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName().substring(26));
         verifiedLogin();
         glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
         projectIssueTypesPage = new ProjectIssueTypesPage(grid.getDriver());

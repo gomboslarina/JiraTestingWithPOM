@@ -13,7 +13,7 @@ class GlassComponentsTest extends BasePageTest {
 
     @BeforeAll
     public void setup() {
-        super.setUp("linux", "chrome");
+        super.setUp("linux", "chrome", this.getClass().getName().substring(26));
         projectComponentsPage = new ProjectComponentsPage(grid.getDriver());
         glassDocumentationPage = new GlassDocumentationPage(grid.getDriver());
         propertiesReader = new PropertiesReader();

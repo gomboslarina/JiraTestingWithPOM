@@ -23,7 +23,7 @@ class BasePageTest {
     public void setUp(String platform, String browser, String testName) {
         grid = new Grid();
         grid.setupEnvironment(platform, browser, testName);
-        grid.getDriver().manage().window().maximize();
+//        grid.getDriver().manage().window().maximize();
         capability = grid.getCapability();
     }
 

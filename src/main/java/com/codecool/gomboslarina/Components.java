@@ -38,6 +38,7 @@ public class Components extends BasePage {
         }
         return component;
     }
+
     public List<String> getComponentData(String url, String compName) {
         TreeMap component = findComponent(url, compName);
         List<String> componentData = new ArrayList<>();

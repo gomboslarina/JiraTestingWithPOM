@@ -23,7 +23,7 @@ public class PropertiesReader {
     PropertiesReader() {
         try {
             properties = new Properties();
-            propFile = new FileInputStream("/home/zsana/Codecool/TESTAUTOMATION/3rd_TW_week/new/JiraTestingWithPOM/src/main/resources/application.properties");
+            propFile = new FileInputStream("application.properties");
             properties.load(propFile);
         } catch (Exception e) {
             System.out.println(e.toString());

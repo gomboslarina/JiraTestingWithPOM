@@ -5,41 +5,21 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
-    private String nodeUrl;
-    private String baseUrl;
-    private String driverPath;
-    private String username;
-    private String password;
-    private String email;
-    private String incorrectUsername;
-    private String incorrectPassword;
-    private String componentsUrl;
-    private String glassComponentsUrl;
-    private String componentsName;
+    private String componentsUrl = System.getenv("COMPURL");
+    private String glassComponentsUrl = System.getenv("GLASSCOMPURL");
+    private String componentsName = System.getenv("COMPNAME");
+    static String driverPath = System.getenv("DRIVERPATH");
+    private String nodeUrl = System.getenv("NODEURL");
+    private String baseUrl = System.getenv("BASEURL");
+    private String username = System.getenv("USERNAME");
+    private String password = System.getenv("PASSWORD");
+    private String email = System.getenv("EMAIL");
+    private String incorrectPassword = System.getenv("INCORRECT_PASSWORD");
+    private String incorrectUsername = System.getenv("INCORRECT_USERNAME");
 
     private Properties properties;
     private FileInputStream propFile;
 
-    PropertiesReader() {
-        try {
-            properties = new Properties();
-            propFile = new FileInputStream("application.properties");
-            properties.load(propFile);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-        nodeUrl = properties.getProperty("nodeUrl");
-        baseUrl = properties.getProperty("baseUrl");
-        driverPath = properties.getProperty("driverPath");
-        username = properties.getProperty("username");
-        password = properties.getProperty("password");
-        email = properties.getProperty("email");
-        incorrectUsername = properties.getProperty("incorrectUsername");
-        incorrectPassword = properties.getProperty("incorrectPassword");
-        componentsUrl= properties.getProperty("componentsUrl");
-        glassComponentsUrl= properties.getProperty("glassComponentsUrl");
-        componentsName = properties.getProperty("componentsName");
-    }
 
     public String getNodeUrl() {
         return nodeUrl;

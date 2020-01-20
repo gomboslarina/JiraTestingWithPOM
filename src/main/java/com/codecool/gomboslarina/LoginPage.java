@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        String loginDashboardPageUrl = "https://jira.codecool.codecanvas.hu/secure/Dashboard.jspa";
+        String loginDashboardPageUrl = "https://jira2.codecool.codecanvas.hu/secure/Dashboard.jspa";
         navigateToPage(loginDashboardPageUrl);
     }
 

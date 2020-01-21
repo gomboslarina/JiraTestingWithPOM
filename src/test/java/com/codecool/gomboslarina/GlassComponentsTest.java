@@ -27,9 +27,9 @@ class GlassComponentsTest extends BasePageTest {
     @Test
     public void createComponentWithAllTheData() {
         List<String> expectedComponents = projectComponentsPage.getComponentData(
-                "https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page",
+                "https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.atlassian.jira.jira-projects-plugin:components-page",
                 "TestComponent");
-        List<String> glassComponents = glassDocumentationPage.getComponentData("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass",
+        List<String> glassComponents = glassDocumentationPage.getComponentData("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass",
                 "TestComponent");
         Assertions.assertIterableEquals(expectedComponents, glassComponents);
     }

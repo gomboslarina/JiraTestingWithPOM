@@ -20,14 +20,17 @@ public class GlassVersionTest extends BasePageTest {
         dashboardPage = new DashboardPage(getDriver());
         projectPage = new ProjectPage(getDriver());
         loginPage.successfulLogin();
-        dashboardPage.goToPrivateProjectPage();
-        projectPage.clickOnGlassLink();
+        //dashboardPage.goToPrivateProjectPage();
+        loginPage.navigateToPage("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass");
+        glassDocumentationPage.gotToGlassVersionPage();
+        //projectPage.clickOnGlassLink();
     }
 
     @Test
     void isGlassVersionUpToDate() {
         List<String> glassVersion = glassDocumentationPage.getGlassVersionAttributes();
-        projectPage.clickOnReleaseLink();
+        //projectPage.clickOnReleaseLink();
+        glassDocumentationPage.navigateToPage("https://jira2.codecool.codecanvas.hu/plugins/servlet/project-config/TIA/administer-versions");
         List<String> version = projectPage.getVersionAttributes();
         Assertions.assertArrayEquals(glassVersion.toArray(), version.toArray());
     }

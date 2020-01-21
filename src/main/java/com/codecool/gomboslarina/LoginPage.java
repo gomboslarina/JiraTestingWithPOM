@@ -6,13 +6,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "//input[@id='login-form-username']")
+    @FindBy(xpath = "//*[@id='login-form-username']")
     private WebElement loginUsername;
 
-    @FindBy(xpath = "//input[@id='login-form-password']")
+    @FindBy(xpath = "//*[@id='login-form-password']")
     private WebElement loginPassWord;
 
-    @FindBy(xpath = "//input[@id='login']")
+    @FindBy(xpath = "//*[@id='login-form-submit']")
     private WebElement loginSubmitButton;
 
     @FindBy(xpath = "//div[@id='usernameerror']")
@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        String loginDashboardPageUrl = "https://jira2.codecool.codecanvas.hu/secure/Dashboard.jspa";
+        String loginDashboardPageUrl = "https://jira2.codecool.codecanvas.hu/login.jsp";
         navigateToPage(loginDashboardPageUrl);
     }
 

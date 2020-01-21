@@ -17,13 +17,13 @@ public class GlassDocumentationPage extends Components {
     @FindBy(xpath = "//a[.='Versions']")
     private WebElement versionLink;
 
-    @FindBy(xpath = "//a[.='5.0']")
-    private WebElement version5Link;
+    @FindBy(xpath = "//a[.='TestVersion']")
+    private WebElement testVersionLink;
 
-    @FindBy(xpath = "//tbody[@class='items ui-sortable']//span[@class='aui-lozenge aui-lozenge-current aui-lozenge-subtle']")
+    @FindBy(xpath = "//span[@class='aui-lozenge aui-lozenge-current aui-lozenge-subtle']")
     private WebElement releaseStatus;
 
-    @FindBy(xpath = "//div[.='22/Oct/19']")
+    @FindBy(xpath = "//div[.='21/Jan/20']")
     private WebElement versionDate;
 
     @FindBy(xpath = "//div[.='Check this version in glass']")
@@ -53,8 +53,8 @@ public class GlassDocumentationPage extends Components {
     }
 
     String getVersionNumber() {
-        waitForElementToBeVisible(version5Link);
-        return version5Link.getText();
+        waitForElementToBeVisible(testVersionLink);
+        return testVersionLink.getText();
     }
 
     String getReleaseStatus() {
@@ -74,7 +74,6 @@ public class GlassDocumentationPage extends Components {
 
     List<String> getGlassVersionAttributes() {
         List<String> versionAttributes = new ArrayList<>();
-        gotToGlassVersionPage();
         versionAttributes.add(getVersionNumber());
         versionAttributes.add(getReleaseStatus());
         versionAttributes.add(getVersionDate());

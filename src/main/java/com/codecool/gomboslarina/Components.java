@@ -14,7 +14,7 @@ public class Components extends BasePage {
     private List<WebElement> componentNames;
 
     @FindBy(xpath = "//table[@id='components-table']/tbody[@class='header']/tr/th")
-    private List<WebElement> componentHeaders;
+    private List<WebElement> projectComponentHeaders;
 
     public Components(WebDriver driver) {
         super(driver);
@@ -23,7 +23,7 @@ public class Components extends BasePage {
         requiredComponents.add("Default assignee");
     }
 
-    public TreeMap<String, String> findComponent(String url, String compName) {
+    public TreeMap<String, String> findComponent(String url, String compName, List<WebElement> componentHeaders) {
         navigateToPage(url);
         TreeMap<String, String> component = new TreeMap<>();
         List<WebElement> tableData = new ArrayList<>();
@@ -38,13 +38,17 @@ public class Components extends BasePage {
         }
         return component;
     }
-    public List<String> getComponentData(String url, String compName) {
-        TreeMap component = findComponent(url, compName);
+    public List<String> getComponentData(String url, String compName, List<WebElement> headers) {
+        TreeMap component = findComponent(url, compName, headers);
         List<String> componentData = new ArrayList<>();
         for (String requiredComponent : requiredComponents) {
             componentData.add((String) component.get(requiredComponent));
         }
         return componentData;
+    }
+
+    public List<WebElement> getProjectComponentHeaders() {
+        return projectComponentHeaders;
     }
 
 }

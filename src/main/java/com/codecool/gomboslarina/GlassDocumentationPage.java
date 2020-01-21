@@ -113,7 +113,7 @@ public class GlassDocumentationPage extends Components {
     }
 
     List findIssueTypesOnGlass() {
-        navigateToPage("https://jira.codecool.codecanvas.hu/projects/PP1?selectedItem=com.codecanvas.glass:glass");
+        navigateToPage("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass");
         List<String> issueTypes = new ArrayList<>();
         for (WebElement issueType : issueTypesGlass
         ) {

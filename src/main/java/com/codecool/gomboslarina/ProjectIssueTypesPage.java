@@ -17,7 +17,7 @@ public class ProjectIssueTypesPage extends BasePage {
     }
 
     public List findIssueTypes() {
-        navigateToPage("https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP1/summary");
+        navigateToPage("https://jira2.codecool.codecanvas.hu/plugins/servlet/project-config/TIA/summary");
         List<String> issueTypes = new ArrayList<>();
         for (WebElement issueType : issueTypesElements
         ) {

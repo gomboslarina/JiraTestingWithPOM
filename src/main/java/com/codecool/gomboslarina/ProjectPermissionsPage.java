@@ -16,6 +16,9 @@ public class ProjectPermissionsPage extends BasePage {
     @FindBy(xpath = "//*[@id='project-config-panel-permissions']")
     private WebElement permissionTable;
 
+    @FindBy(xpath = "//*[@id='project-config-panel-permissions']/jira-permissions-table/div/table/tbody//td/p[@class='title']")
+    private List<WebElement> permissionTitles;
+
     private String projectPermissionsUrl = "https://jira.codecool.codecanvas.hu/plugins/servlet/project-config/PP4/permissions";
 
     // with this method we get all the data we need from the permission table as a list of list of strings. Maybe it should be Hashmap.
@@ -32,7 +35,9 @@ public class ProjectPermissionsPage extends BasePage {
         for (WebElement row : tableRows) {
             List<String> data = new ArrayList<>();
             // add permission name to list:
-            data.add(row.findElement(By.cssSelector("td[data-headers='project-permissions'] > p.title")).getText());
+            if (row.findElement(By.cssSelector("td[data-headers='project-permissions'] > p.title")).getText().equals("Glass View permission")) {
+                data.add(row.findElement(By.cssSelector("td[data-headers='project-permissions'] > p.title")).getText());
+            }
             // add user permissions to list
             for (WebElement we: row.findElements(By.cssSelector("dl.types"))) {
                 data.add(we.getText());
@@ -50,25 +55,37 @@ public class ProjectPermissionsPage extends BasePage {
             List<Boolean> permissionTicks = new ArrayList<>();
             permissionTicks.add(false);
             for (int i = 1; i < permRow.size(); i++) {
-                if (permRow.get(i).contains("Application access".toLowerCase())) {
+                if (permRow.get(i).contains("Current user".toLowerCase())) {
                     permissionTicks.add(true);
                     permissionTicks.set(0, true);
                 } else {
                     permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Project Role".toLowerCase())) {
+                if (permRow.get(i).contains("Any logged in".toLowerCase())) {
                     permissionTicks.add(true);
                     permissionTicks.set(0, true);
                 } else {
                     permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Assignee".toLowerCase())) {
+                if (permRow.get(i).contains("Administrators".toLowerCase())) {
                     permissionTicks.add(true);
                     permissionTicks.set(0, true);
                 } else {
                     permissionTicks.add(false);
                 }
-                if (permRow.get(i).contains("Reporter".toLowerCase())) {
+                if (permRow.get(i).contains("Application access: jira-software-users".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
+                }
+                if (permRow.get(i).contains("Group: jira-software-users".toLowerCase())) {
+                    permissionTicks.add(true);
+                    permissionTicks.set(0, true);
+                } else {
+                    permissionTicks.add(false);
+                }
+                if (permRow.get(i).contains("Developers".toLowerCase())) {
                     permissionTicks.add(true);
                     permissionTicks.set(0, true);
                 } else {
@@ -83,7 +100,7 @@ public class ProjectPermissionsPage extends BasePage {
     }
 
     boolean areProjectAndGlassPermissionsEqual(ProjectPage projectPage, GlassDocumentationPage glassDocumentationPage) {
-        goToPermissions();
+        //goToPermissions();
         Map<String, List<Boolean>> projectPermissions = createMapFromProjectPagePermissions();
         projectPage.clickOnGlassLink();
         glassDocumentationPage.goToGlassPermissionPage();
@@ -123,5 +140,40 @@ public class ProjectPermissionsPage extends BasePage {
     private void goToPermissions() {
         navigateToPage(projectPermissionsUrl);
     }
+
+    /* For glass regression tests:
+
+    WebElement findElement(String elementText) {
+        for (WebElement element : permissionTitles) {
+            if (element.getText().equals(elementText)) {
+                return element;
+            }
+        }
+        System.out.println("No element found under this name.");
+        return null;
+    }
+
+    WebElement getParentOfElement(WebElement element) {
+        return element.findElement(By.xpath("./parent::td"));
+    }
+
+
+    WebElement getSiblingElement(WebElement element) {
+        return element.findElement(By.xpath("./following-sibling::td"));
+    }
+
+    WebElement getChildrenElements(WebElement element) {
+        return element.findElement(By.xpath("./child::dl"));
+    }
+
+    String getValue() {
+        WebElement element = findElement("Browse Projects");
+        WebElement parentElement = getParentOfElement(element);
+        WebElement siblingElement = getSiblingElement(parentElement);
+        WebElement childElement = getChildrenElements(siblingElement);
+        return childElement.getTagName();
+    }
+
+     */
 
 }

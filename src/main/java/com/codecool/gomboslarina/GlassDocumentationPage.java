@@ -43,8 +43,25 @@ public class GlassDocumentationPage extends Components {
 
     private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
 
+    @FindBy(xpath = "//*[@id='glass-permissions-panel']/div/table/tbody/tr[21]")
+    private WebElement glassViewPermissionsTableRow;
+
     public String getPageUrl() {
         return pageUrl;
+    }
+
+    boolean[] getPermissionTicks(String user) {
+        List<WebElement> tickHolders = glassViewPermissionsTableRow.findElements(By.cssSelector(".td-icon"));
+        boolean[] ticks = new boolean[6];
+        for (int i = 0; i < 6; i++) {
+            try {
+                tickHolders.get(i).findElement(By.cssSelector(".glass-true-icon"));
+                ticks[i] = true;
+            } catch (Exception e) {
+                ticks[i] = false;
+            }
+        }
+        return ticks;
     }
 
     void gotToGlassVersionPage() {
@@ -81,7 +98,8 @@ public class GlassDocumentationPage extends Components {
         return versionAttributes;
     }
 
-    void goToGlassPermissionPage() {
+    public void goToGlassPermissionPage() {
+        navigateToPage("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass");
         waitForElementToBeClickable(glassPermissionLink);
         glassPermissionLink.click();
     }
@@ -106,7 +124,9 @@ public class GlassDocumentationPage extends Components {
             // System.out.println("GLassPermissionPage");
             // System.out.println(row.findElement(By.cssSelector(".title")).getText());
             // System.out.println(Arrays.toString(permissionTicks.toArray()));
-            permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
+            if (row.findElement(By.cssSelector(".title")).getText().equals("Glass View permission")) {
+                permissions.put(row.findElement(By.cssSelector(".title")).getText(), permissionTicks);
+            }
         }
         return permissions;
     }
@@ -125,4 +145,6 @@ public class GlassDocumentationPage extends Components {
     public List<WebElement> getGlassComponentHeaders() {
         return glassComponentHeaders;
     }
+
+
 }

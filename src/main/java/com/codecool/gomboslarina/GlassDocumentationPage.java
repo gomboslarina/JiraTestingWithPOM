@@ -146,5 +146,4 @@ public class GlassDocumentationPage extends Components {
         return glassComponentHeaders;
     }
 
-
 }

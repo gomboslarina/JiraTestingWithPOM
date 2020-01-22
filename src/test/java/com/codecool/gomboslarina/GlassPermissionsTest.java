@@ -25,7 +25,6 @@ public class GlassPermissionsTest extends BasePageTest {
         glassDocumentationPage = new GlassDocumentationPage(getDriver());
         loginPage.successfulLogin();
         glassDocumentationPage.goToGlassPermissionPage();
-        //dashboardPage.goToPrivateProjectPage();
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
@@ -36,11 +35,9 @@ public class GlassPermissionsTest extends BasePageTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/glassPermissions.csv", numLinesToSkip = 1)
-    void areGlassViewPermissionsCorrect(String user, boolean b1, boolean b2, boolean b3, boolean b4, boolean b5, boolean b6) {
+    void areGlassViewPermissionsCorrect(boolean b1, boolean b2, boolean b3, boolean b4, boolean b5, boolean b6) {
         boolean[] ticks = {b1, b2, b3, b4, b5, b6};
-        if (user.equals("superuser")) {
-            Assertions.assertArrayEquals(ticks, glassDocumentationPage.getPermissionTicks(user));
-        }
+        Assertions.assertArrayEquals(ticks, glassDocumentationPage.getGlassTableRowTicks(6, glassDocumentationPage.getGlassViewPermissionsTableRow()));
     }
 
     @AfterAll

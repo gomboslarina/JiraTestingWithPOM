@@ -41,19 +41,25 @@ public class GlassDocumentationPage extends Components {
     @FindBy(xpath = "//*[@id='components-table']/thead/tr/th")
     private List<WebElement> glassComponentHeaders;
 
-    private String pageUrl = "https://jira.codecool.codecanvas.hu/projects/PP4?selectedItem=com.codecanvas.glass:glass";
+    private String pageUrl = "https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass";
 
     @FindBy(xpath = "//*[@id='glass-permissions-panel']/div/table/tbody/tr[21]")
     private WebElement glassViewPermissionsTableRow;
+
+    @FindBy(xpath = "//*[@id=\"glass-notifications-panel\"]/div/table/tbody/tr[1]")
+    private WebElement notificationsTableRow;
+
+    @FindBy(xpath = "//*[@id='glass-notifications-nav']/a")
+    WebElement notificationsLink;
 
     public String getPageUrl() {
         return pageUrl;
     }
 
-    boolean[] getPermissionTicks(String user) {
-        List<WebElement> tickHolders = glassViewPermissionsTableRow.findElements(By.cssSelector(".td-icon"));
-        boolean[] ticks = new boolean[6];
-        for (int i = 0; i < 6; i++) {
+    boolean[] getGlassTableRowTicks(int column, WebElement table) {
+        List<WebElement> tickHolders = table.findElements(By.cssSelector(".td-icon"));
+        boolean[] ticks = new boolean[column];
+        for (int i = 0; i < column; i++) {
             try {
                 tickHolders.get(i).findElement(By.cssSelector(".glass-true-icon"));
                 ticks[i] = true;
@@ -99,11 +105,16 @@ public class GlassDocumentationPage extends Components {
     }
 
     public void goToGlassPermissionPage() {
-        navigateToPage("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass");
+        navigateToPage(pageUrl);
         waitForElementToBeClickable(glassPermissionLink);
         glassPermissionLink.click();
     }
 
+    public void goToNotificationsPage() {
+        navigateToPage(pageUrl);
+        waitForElementToBeClickable(notificationsLink);
+        notificationsLink.click();
+    }
 
     // This shows the permission ticks from the glass doc page:
     Map<String, List<Boolean>> getGlassPagePermissions() {
@@ -146,4 +157,11 @@ public class GlassDocumentationPage extends Components {
         return glassComponentHeaders;
     }
 
+    public WebElement getGlassViewPermissionsTableRow() {
+        return glassViewPermissionsTableRow;
+    }
+
+    public WebElement getNotificationsTableRow() {
+        return notificationsTableRow;
+    }
 }

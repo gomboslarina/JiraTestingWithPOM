@@ -1,3 +1,2 @@
-user,current user,appl access any,project role admin, appl access jira,group,project role dev
-superuser,true,false,true,false,false,true
-projectadmin,true,false,true,false,false,true
+current user,appl access any,project role admin, appl access jira,group,project role dev
+true,false,true,false,false,true

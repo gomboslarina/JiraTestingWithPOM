@@ -52,6 +52,18 @@ public class GlassDocumentationPage extends Components {
     @FindBy(xpath = "//*[@id='glass-notifications-nav']/a")
     WebElement notificationsLink;
 
+    @FindBy(xpath = "//*[@id=\"glass-workflow-nav\"]/a/div")
+    WebElement issueTypesLink;
+
+    @FindBy(xpath = "//*[@id=\"dropdown-issuetypes\"]/div/aui-section/div/aui-item-link[3]/a")
+    WebElement bugIssueLink;
+
+    @FindBy(xpath = "//*[@id=\"glass-screen-container\"]/div/ul/li[1]")
+    WebElement createIssueTableLink;
+
+    @FindBy(xpath = "//*[@id=\"glass-workflows-create-panel\"]/div/table/tbody/tr")
+    List<WebElement> tableBodyRows;
+
     public String getPageUrl() {
         return pageUrl;
     }
@@ -73,6 +85,26 @@ public class GlassDocumentationPage extends Components {
     void gotToGlassVersionPage() {
         waitForElementToBeClickable(versionLink);
         versionLink.click();
+    }
+
+    void gotToBugScreenPageCreateIssueTable() {
+        navigateToPage(pageUrl);
+        waitForElementToBeClickable(issueTypesLink);
+        issueTypesLink.click();
+        waitForElementToBeClickable(bugIssueLink);
+        bugIssueLink.click();
+        waitForElementToBeClickable(createIssueTableLink);
+        createIssueTableLink.click();
+    }
+
+    public HashMap<String, String> getCreateIssueTable() {
+        HashMap<String, String> tableData = new HashMap<>();
+        gotToBugScreenPageCreateIssueTable();
+        for (WebElement element : tableBodyRows) {
+            List<WebElement> childrenElements = element.findElements(By.xpath("*"));
+            tableData.put(childrenElements.get(0).getText(), childrenElements.get(1).getText());
+        }
+        return tableData;
     }
 
     String getVersionNumber() {

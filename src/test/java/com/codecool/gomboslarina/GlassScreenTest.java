@@ -1,9 +1,6 @@
 package com.codecool.gomboslarina;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class GlassScreenTest extends BasePageTest {
@@ -23,11 +20,9 @@ public class GlassScreenTest extends BasePageTest {
         loginPage.successfulLogin();
     }
 
-    @Test
+    @Test // BUG -> Create issue screen
     void areTablesEqual() {
-        for (String s : projectScreensPage.createHashMapFromTable().values()) {
-            System.out.println(s);
-        }
+        Assertions.assertEquals(projectScreensPage.createHashMapFromTable(), glassDocumentationPage.getCreateIssueTable());
     }
 
 

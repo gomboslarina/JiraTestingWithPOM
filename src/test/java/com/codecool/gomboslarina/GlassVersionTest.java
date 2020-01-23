@@ -20,7 +20,6 @@ public class GlassVersionTest extends BasePageTest {
         dashboardPage = new DashboardPage(getDriver());
         projectPage = new ProjectPage(getDriver());
         loginPage.successfulLogin();
-        //dashboardPage.goToPrivateProjectPage();
         loginPage.navigateToPage("https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass");
         glassDocumentationPage.gotToGlassVersionPage();
         //projectPage.clickOnGlassLink();

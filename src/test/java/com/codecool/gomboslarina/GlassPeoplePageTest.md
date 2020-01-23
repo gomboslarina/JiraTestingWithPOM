@@ -1,6 +1,9 @@
 This is a manual test for People page in Glass documentation.
 Test scenario: check if glass People page correlates with Jira "Users and roles" page
 
+Jira page url: https://jira2.codecool.codecanvas.hu/plugins/servlet/project-config/TIA/roles
+Glass page url: https://jira2.codecool.codecanvas.hu/projects/TIA?selectedItem=com.codecanvas.glass:glass - click on People link
+
 Check the following on the Jira page:
 - Project lead
 - Default Assignee

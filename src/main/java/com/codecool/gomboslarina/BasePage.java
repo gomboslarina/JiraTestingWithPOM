@@ -6,22 +6,11 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.Map;
 
 public class BasePage {
 
-    static String driverPath = System.getenv("DRIVERPATH");
-    WebDriver webDriver;
-    String url = "https://jira.codecool.codecanvas.hu/";
     private String username = System.getenv("USERNAME");
     private String password = System.getenv("PASSWORD");
     private String email = System.getenv("EMAIL");

@@ -1,12 +1,9 @@
+/*
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CreateIssuePopupPageTest extends BasePageTest {
@@ -16,7 +13,7 @@ class CreateIssuePopupPageTest extends BasePageTest {
 
     @BeforeAll
     public void setup() {
-        super.setUp();
+        super.setUp("linux", "chrome", this.getClass().getName());
         login();
         dashboardPage = new DashboardPage(getDriver());
         createIssuePopupPage = new CreateIssuePopupPage(getDriver());
@@ -58,3 +55,5 @@ class CreateIssuePopupPageTest extends BasePageTest {
         Assertions.assertTrue(createIssuePopupPage.checkIfErrorMessageAppearsWithoutSummary());
     }
 }
+
+ */

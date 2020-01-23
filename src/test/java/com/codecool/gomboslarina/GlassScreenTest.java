@@ -12,7 +12,7 @@ public class GlassScreenTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
+        super.setUp("linux", "chrome", this.getClass().getName());
         loginPage = new LoginPage(getDriver());
         glassDocumentationPage = new GlassDocumentationPage(getDriver());
         dashboardPage = new DashboardPage(getDriver());

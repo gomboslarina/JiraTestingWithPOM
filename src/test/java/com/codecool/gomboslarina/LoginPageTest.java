@@ -1,3 +1,4 @@
+/*
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
@@ -48,3 +49,5 @@ class LoginPageTest extends BasePageTest {
     }
 
 }
+
+ */

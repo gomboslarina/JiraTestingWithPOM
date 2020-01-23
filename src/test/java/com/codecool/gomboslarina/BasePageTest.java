@@ -1,20 +1,21 @@
 package com.codecool.gomboslarina;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BasePageTest {
-    private static String driverPath = System.getenv("DRIVERPATH");
     private WebDriver driver;
+    private Grid grid;
+    private DesiredCapabilities capability;
 
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    public void setUp(String platform, String browser, String testName) {
+        grid = new Grid();
+        grid.setupEnvironment(platform, browser, testName);
+        driver = grid.getDriver();
+//        driver.manage().window().maximize();
+        capability = grid.getCapability();
     }
 
     public void login() {

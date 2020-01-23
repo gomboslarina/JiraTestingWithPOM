@@ -11,7 +11,7 @@ class GlassComponentsTest extends BasePageTest {
 
     @BeforeAll
     public void setup() {
-        setUp();
+        setUp("linux", "chrome", this.getClass().getName());
         login();
         projectComponentsPage = new ProjectComponentsPage(getDriver());
         glassDocumentationPage = new GlassDocumentationPage(getDriver());
@@ -31,5 +31,4 @@ class GlassComponentsTest extends BasePageTest {
                 "TestComponent", glassDocumentationPage.getGlassComponentHeaders());
         Assertions.assertIterableEquals(expectedComponents, glassComponents);
     }
-
 }

@@ -1,3 +1,4 @@
+/*
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
@@ -14,7 +15,7 @@ public class BrowseIssueTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
+        super.setUp("linux", "chrome", this.getClass().getName());
         loginPage = new LoginPage(getDriver());
         dashboardPage = new DashboardPage(getDriver());
         projectPage = new ProjectPage(getDriver());
@@ -46,3 +47,5 @@ public class BrowseIssueTest extends BasePageTest {
         shutDown();
     }
 }
+
+ */

@@ -17,7 +17,7 @@ public class GlassPermissionsTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
+        super.setUp("linux", "chrome", this.getClass().getName());
         loginPage = new LoginPage(getDriver());
         dashboardPage = new DashboardPage(getDriver());
         projectPermissionsPage = new ProjectPermissionsPage(getDriver());

@@ -1,3 +1,4 @@
+/*
 package com.codecool.gomboslarina;
 
 import org.junit.jupiter.api.*;
@@ -14,7 +15,7 @@ class EditIssuePopupPageTest extends BasePageTest {
 
     @BeforeAll
     void setup() {
-        super.setUp();
+        super.setUp("linux", "chrome", this.getClass().getName());
         login();
         issuePage = new IssuePage(getDriver());
         editIssuePopupPage = new EditIssuePopupPage(getDriver());
@@ -41,3 +42,5 @@ class EditIssuePopupPageTest extends BasePageTest {
         Assertions.assertTrue(issuePage.checkPermissionToEditIssue());
     }
 }
+
+ */

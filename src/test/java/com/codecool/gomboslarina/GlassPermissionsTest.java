@@ -28,11 +28,6 @@ public class GlassPermissionsTest extends BasePageTest {
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    @Test
-    void areGlassPermissionsParallelWithProjectPermissions() {
-        Assertions.assertTrue(projectPermissionsPage.areProjectAndGlassPermissionsEqual(projectPage, glassDocumentationPage));
-    }
-
     @ParameterizedTest
     @CsvFileSource(resources = "/glassPermissions.csv", numLinesToSkip = 1)
     void areGlassViewPermissionsCorrect(boolean b1, boolean b2, boolean b3, boolean b4, boolean b5, boolean b6) {
